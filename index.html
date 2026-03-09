@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -106,7 +105,6 @@
     }
     .mobile-menu a:hover { color: var(--gold); opacity: 1; }
 
-    /* ─── HERO ─── */
     #home {
       min-height: 100vh;
       display: flex;
@@ -187,7 +185,6 @@
     .btn-ghost::after { content: '→'; font-size: 1rem; }
     .btn-ghost:hover { opacity: 1; }
 
-    /* ─── STATS BAR ─── */
     .stats-bar {
       background: var(--dark-3);
       border-top: 1px solid rgba(201,168,76,0.15);
@@ -215,7 +212,6 @@
       margin-top: 0.5rem;
     }
 
-    /* ─── SECTION SHARED ─── */
     section { padding: 8rem 4rem; position: relative; }
 
     .section-label {
@@ -241,7 +237,6 @@
       margin-bottom: 2.5rem;
     }
 
-    /* ─── ABOUT ─── */
     #about {
       background: var(--dark-2);
       display: grid;
@@ -266,10 +261,8 @@
 
     .about-accent-box {
       position: absolute;
-      bottom: -2rem;
-      right: -2rem;
-      width: 40%;
-      height: 45%;
+      bottom: -2rem; right: -2rem;
+      width: 40%; height: 45%;
       border: 1px solid rgba(201,168,76,0.25);
       background: rgba(201,168,76,0.03);
       pointer-events: none;
@@ -307,7 +300,6 @@
     }
     .value-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; }
 
-    /* ─── PRODUCTS ─── */
     #products { background: var(--dark); }
     .products-header { margin-bottom: 4rem; }
 
@@ -355,7 +347,6 @@
       font-weight: 600;
     }
 
-    /* ─── CONTACT ─── */
     #contact {
       background: var(--dark-2);
       display: grid;
@@ -424,7 +415,6 @@
     }
     .form-submit:hover { background: var(--gold); color: var(--dark); }
 
-    /* ─── FOOTER ─── */
     footer {
       background: var(--dark);
       border-top: 1px solid rgba(201,168,76,0.12);
@@ -454,7 +444,6 @@
     }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -466,7 +455,6 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
@@ -493,7 +481,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="#home" class="nav-logo">EXCORP DISTRIBUTION</a>
     <ul class="nav-links">
@@ -507,7 +494,6 @@
     </button>
   </nav>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="closeMenu()">Home</a>
     <a href="#about" onclick="closeMenu()">About</a>
@@ -515,22 +501,16 @@
     <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 
-  <!-- HERO -->
   <section id="home">
     <p class="hero-tag">Premium FMCG Distribution</p>
-    <h1 class="hero-title">
-      Delivering <em>Excellence</em><br>Across Every Shelf
-    </h1>
-    <p class="hero-subtitle">
-      Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.
-    </p>
+    <h1 class="hero-title">Delivering <em>Excellence</em><br>Across Every Shelf</h1>
+    <p class="hero-subtitle">Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.</p>
     <div class="hero-cta">
       <a href="#products" class="btn-primary">Our Products</a>
       <a href="#contact" class="btn-ghost">Get in Touch</a>
     </div>
   </section>
 
-  <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stat-item reveal">
       <div class="stat-number">500+</div>
@@ -546,25 +526,17 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-image-block reveal">
-      <img
-        src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80"
-        alt="Excorp Distribution warehouse"
-      />
+      <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80" alt="Excorp Distribution warehouse" />
       <div class="about-accent-box"></div>
     </div>
     <div class="about-text">
       <p class="section-label reveal">Our Story</p>
       <h2 class="section-title reveal">Built on Trust.<br>Driven by Quality.</h2>
       <div class="divider reveal"></div>
-      <p class="reveal">
-        Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region.
-      </p>
-      <p class="reveal">
-        Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence.
-      </p>
+      <p class="reveal">Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region.</p>
+      <p class="reveal">Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence.</p>
       <div class="about-values reveal">
         <div class="value-item">
           <div class="value-title">Reliability</div>
@@ -586,7 +558,6 @@
     </div>
   </section>
 
-  <!-- PRODUCTS -->
   <section id="products">
     <div class="products-header">
       <p class="section-label reveal">What We Distribute</p>
@@ -621,21 +592,16 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-info">
       <p class="section-label reveal">Reach Out</p>
       <h2 class="section-title reveal">Let's Work<br>Together</h2>
       <div class="divider reveal"></div>
-      <p class="reveal">
-        Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you. Our team is ready to build a partnership that delivers.
-      </p>
+      <p class="reveal">Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you. Our team is ready to build a partnership that delivers.</p>
       <div class="contact-details reveal">
         <div class="contact-detail-item">
           <span class="contact-detail-label">Email</span>
-          <span class="contact-detail-value">
-            <a href="mailto:Farhan@excorpdistribution.com">Farhan@excorpdistribution.com</a>
-          </span>
+          <span class="contact-detail-value"><a href="mailto:Farhan@excorpdistribution.com">Farhan@excorpdistribution.com</a></span>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-label">Phone</span>
@@ -668,7 +634,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">EXCORP DISTRIBUTION</div>
     <ul class="footer-links">
@@ -687,7 +652,6 @@
     function closeMenu() {
       document.getElementById('mobileMenu').classList.remove('open');
     }
-
     function sendEnquiry() {
       const name = document.getElementById('fname').value;
       const company = document.getElementById('fcompany').value;
@@ -695,17 +659,12 @@
       const message = document.getElementById('fmessage').value;
       if (!name || !email) { alert('Please fill in your name and email.'); return; }
       const subject = encodeURIComponent('Enquiry from ' + (name || 'Website Visitor'));
-      const body = encodeURIComponent(
-        'Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message
-      );
+      const body = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
       window.location.href = `mailto:Farhan@excorpdistribution.com?subject=${subject}&body=${body}`;
     }
-
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
   </script>
