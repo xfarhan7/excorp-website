@@ -18,7 +18,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -27,17 +26,6 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
-    }
-
-    /* ─── NOISE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.35;
     }
 
     /* ─── NAV ─── */
@@ -49,8 +37,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.5rem 4rem;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
-      backdrop-filter: blur(2px);
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
     }
 
     .nav-logo {
@@ -77,8 +66,45 @@
       opacity: 0.8;
       transition: opacity 0.3s, color 0.3s;
     }
-
     .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 65px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 2rem;
+      z-index: 999;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    .mobile-menu a:hover { color: var(--gold); opacity: 1; }
 
     /* ─── HERO ─── */
     #home {
@@ -87,27 +113,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding: 0 4rem;
+      padding: 8rem 4rem 4rem;
       position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
       background:
         radial-gradient(ellipse 60% 70% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
         linear-gradient(135deg, #0a0a0a 0%, #111108 100%);
-    }
-
-    .hero-line {
-      position: absolute;
-      right: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
-      right: 35%;
-      opacity: 0.3;
     }
 
     .hero-tag {
@@ -116,35 +126,26 @@
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
+      animation: fadeUp 0.8s ease 0.2s both;
     }
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-size: clamp(3rem, 8vw, 7rem);
       font-weight: 300;
       line-height: 1.05;
-      letter-spacing: -0.01em;
       max-width: 700px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.4s forwards;
+      animation: fadeUp 0.9s ease 0.4s both;
     }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
+    .hero-title em { font-style: italic; color: var(--gold); }
 
     .hero-subtitle {
       margin-top: 2rem;
       max-width: 420px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       line-height: 1.9;
-      letter-spacing: 0.05em;
       color: var(--text-muted);
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.6s forwards;
+      animation: fadeUp 0.9s ease 0.6s both;
     }
 
     .hero-cta {
@@ -152,8 +153,8 @@
       display: flex;
       gap: 1.5rem;
       align-items: center;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.8s forwards;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s ease 0.8s both;
     }
 
     .btn-primary {
@@ -167,8 +168,8 @@
       text-transform: uppercase;
       text-decoration: none;
       transition: background 0.3s, transform 0.2s;
+      display: inline-block;
     }
-
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     .btn-ghost {
@@ -183,28 +184,35 @@
       align-items: center;
       gap: 0.6rem;
     }
-
     .btn-ghost::after { content: '→'; font-size: 1rem; }
     .btn-ghost:hover { opacity: 1; }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 4rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--dark-3);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem 4rem;
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      justify-content: space-around;
+      gap: 2rem;
+      text-align: center;
+      flex-wrap: wrap;
     }
 
-    .hero-scroll::before {
-      content: '';
-      width: 40px;
-      height: 1px;
-      background: var(--gold-dim);
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
     }
 
     /* ─── SECTION SHARED ─── */
@@ -233,34 +241,6 @@
       margin-bottom: 2.5rem;
     }
 
-    /* ─── STATS BANNER ─── */
-    .stats-bar {
-      background: var(--dark-3);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: space-around;
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-item {}
-    .stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-
     /* ─── ABOUT ─── */
     #about {
       background: var(--dark-2);
@@ -273,41 +253,31 @@
     .about-image-block {
       position: relative;
       height: 500px;
+      overflow: hidden;
     }
 
-    .about-img-main {
-      width: 75%;
+    .about-image-block img {
+      width: 100%;
       height: 100%;
       object-fit: cover;
-      background: var(--dark-3);
-      position: relative;
-    }
-
-    .about-img-placeholder {
-      width: 75%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a1a1a, #111);
-      border: 1px solid rgba(201,168,76,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      filter: brightness(0.85) sepia(0.1);
     }
 
     .about-accent-box {
       position: absolute;
       bottom: -2rem;
-      right: 0;
+      right: -2rem;
       width: 40%;
-      height: 55%;
+      height: 45%;
       border: 1px solid rgba(201,168,76,0.25);
       background: rgba(201,168,76,0.03);
+      pointer-events: none;
     }
-
     .about-accent-box::after {
       content: 'EST. 2023';
       position: absolute;
-      bottom: 1.5rem;
-      left: 1.5rem;
+      bottom: 1.5rem; left: 1.5rem;
       font-size: 0.55rem;
       letter-spacing: 0.3em;
       color: var(--gold-dim);
@@ -327,11 +297,7 @@
       gap: 1.5rem;
     }
 
-    .value-item {
-      border-left: 1px solid var(--gold-dim);
-      padding-left: 1rem;
-    }
-
+    .value-item { border-left: 1px solid var(--gold-dim); padding-left: 1rem; }
     .value-title {
       font-size: 0.7rem;
       letter-spacing: 0.15em;
@@ -339,28 +305,15 @@
       color: var(--gold);
       margin-bottom: 0.4rem;
     }
-
-    .value-desc {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
+    .value-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; }
 
     /* ─── PRODUCTS ─── */
-    #products {
-      background: var(--dark);
-    }
-
-    .products-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-    }
+    #products { background: var(--dark); }
+    .products-header { margin-bottom: 4rem; }
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
       background: rgba(201,168,76,0.08);
     }
@@ -371,9 +324,7 @@
       position: relative;
       overflow: hidden;
       transition: background 0.4s;
-      cursor: default;
     }
-
     .product-card::before {
       content: '';
       position: absolute;
@@ -384,39 +335,24 @@
       transform-origin: left;
       transition: transform 0.4s ease;
     }
-
     .product-card:hover { background: #161612; }
     .product-card:hover::before { transform: scaleX(1); }
 
-    .product-icon {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.7;
-    }
-
+    .product-icon { font-size: 2rem; margin-bottom: 1.5rem; opacity: 0.7; }
     .product-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
       font-weight: 400;
       margin-bottom: 1rem;
-      color: var(--off-white);
     }
-
-    .product-desc {
-      font-size: 0.75rem;
-      line-height: 1.9;
-      color: var(--text-muted);
-    }
-
+    .product-desc { font-size: 0.75rem; line-height: 1.9; color: var(--text-muted); }
     .product-number {
       position: absolute;
-      top: 2rem;
-      right: 2.5rem;
+      top: 2rem; right: 2.5rem;
       font-family: 'Cormorant Garamond', serif;
       font-size: 3.5rem;
       color: rgba(201,168,76,0.06);
       font-weight: 600;
-      line-height: 1;
     }
 
     /* ─── CONTACT ─── */
@@ -435,50 +371,26 @@
       margin-bottom: 2.5rem;
     }
 
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .contact-detail-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
+    .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-detail-item { display: flex; flex-direction: column; gap: 0.3rem; }
     .contact-detail-label {
       font-size: 0.55rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
     }
+    .contact-detail-value { font-size: 0.85rem; color: var(--off-white); opacity: 0.8; }
+    .contact-detail-value a { color: inherit; text-decoration: none; }
+    .contact-detail-value a:hover { color: var(--gold); }
 
-    .contact-detail-value {
-      font-size: 0.85rem;
-      color: var(--off-white);
-      opacity: 0.8;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
     .form-label {
       font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--gold-dim);
     }
-
     .form-input, .form-textarea {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(201,168,76,0.2);
@@ -491,14 +403,11 @@
       transition: border-color 0.3s;
       width: 100%;
     }
-
     .form-input:focus, .form-textarea:focus {
       border-color: var(--gold);
       background: rgba(201,168,76,0.04);
     }
-
     .form-textarea { resize: vertical; min-height: 130px; }
-
     .form-submit {
       align-self: flex-start;
       padding: 0.9rem 2.8rem;
@@ -513,11 +422,7 @@
       cursor: pointer;
       transition: background 0.3s, color 0.3s;
     }
-
-    .form-submit:hover {
-      background: var(--gold);
-      color: var(--dark);
-    }
+    .form-submit:hover { background: var(--gold); color: var(--dark); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -527,8 +432,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
     }
-
     .footer-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem;
@@ -536,19 +442,8 @@
       color: var(--gold);
       letter-spacing: 0.15em;
     }
-
-    .footer-copy {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
+    .footer-copy { font-size: 0.65rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
     .footer-links a {
       font-size: 0.65rem;
       letter-spacing: 0.15em;
@@ -557,7 +452,6 @@
       text-decoration: none;
       transition: color 0.3s;
     }
-
     .footer-links a:hover { color: var(--gold); }
 
     /* ─── ANIMATIONS ─── */
@@ -565,28 +459,35 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .reveal {
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
-      .nav-links { gap: 1.5rem; }
-      section { padding: 5rem 2rem; }
-      #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      #home { padding: 7rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .stats-bar { padding: 2rem 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
       .about-image-block { height: 280px; }
+      .about-accent-box { display: none; }
       .products-grid { grid-template-columns: 1fr; }
-      .stats-bar { flex-wrap: wrap; }
-      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-      #home { padding: 0 2rem; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .form-submit { align-self: stretch; text-align: center; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.8rem; }
+      .about-values { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -601,12 +502,21 @@
       <li><a href="#products">Products</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#products" onclick="closeMenu()">Products</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
 
   <!-- HERO -->
   <section id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-line"></div>
     <p class="hero-tag">Premium FMCG Distribution</p>
     <h1 class="hero-title">
       Delivering <em>Excellence</em><br>Across Every Shelf
@@ -618,7 +528,6 @@
       <a href="#products" class="btn-primary">Our Products</a>
       <a href="#contact" class="btn-ghost">Get in Touch</a>
     </div>
-    <div class="hero-scroll">Scroll to explore</div>
   </section>
 
   <!-- STATS BAR -->
@@ -640,12 +549,10 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="about-image-block reveal">
-      <div class="about-img-placeholder">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-          <rect x="1" y="1" width="58" height="58" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-          <path d="M20 30 L30 20 L40 30 L30 40 Z" stroke="rgba(201,168,76,0.3)" stroke-width="1" fill="none"/>
-        </svg>
-      </div>
+      <img
+        src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80"
+        alt="Excorp Distribution warehouse"
+      />
       <div class="about-accent-box"></div>
     </div>
     <div class="about-text">
@@ -682,11 +589,9 @@
   <!-- PRODUCTS -->
   <section id="products">
     <div class="products-header">
-      <div>
-        <p class="section-label reveal">What We Distribute</p>
-        <h2 class="section-title reveal">Our Product<br>Categories</h2>
-        <div class="divider reveal"></div>
-      </div>
+      <p class="section-label reveal">What We Distribute</p>
+      <h2 class="section-title reveal">Our Product<br>Categories</h2>
+      <div class="divider reveal"></div>
     </div>
     <div class="products-grid">
       <div class="product-card reveal">
@@ -713,7 +618,6 @@
         <div class="product-name">Home & Cleaning</div>
         <div class="product-desc">Household cleaning products, detergents, and home care essentials designed for everyday excellence.</div>
       </div>
-
     </div>
   </section>
 
@@ -729,7 +633,9 @@
       <div class="contact-details reveal">
         <div class="contact-detail-item">
           <span class="contact-detail-label">Email</span>
-          <span class="contact-detail-value"><a href="mailto:Farhan@excorpdistribution.com" style="color:inherit;text-decoration:none;">Farhan@excorpdistribution.com</a></span>
+          <span class="contact-detail-value">
+            <a href="mailto:Farhan@excorpdistribution.com">Farhan@excorpdistribution.com</a>
+          </span>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-label">Phone</span>
@@ -775,12 +681,19 @@
   </footer>
 
   <script>
-    // Send enquiry via mailto
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
     function sendEnquiry() {
       const name = document.getElementById('fname').value;
       const company = document.getElementById('fcompany').value;
       const email = document.getElementById('femail').value;
       const message = document.getElementById('fmessage').value;
+      if (!name || !email) { alert('Please fill in your name and email.'); return; }
       const subject = encodeURIComponent('Enquiry from ' + (name || 'Website Visitor'));
       const body = encodeURIComponent(
         'Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message
@@ -788,21 +701,13 @@
       window.location.href = `mailto:Farhan@excorpdistribution.com?subject=${subject}&body=${body}`;
     }
 
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
-
-    // Smooth active nav highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 100) current = s.id;
-      });
-    
+  </script>
+</body>
+</html>
