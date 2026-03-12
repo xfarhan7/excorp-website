@@ -841,6 +841,91 @@
       .about-values { grid-template-columns: 1fr; }
       .hero-cta { flex-direction: column; align-items: flex-start; }
     }
+
+    .btn-catalogue {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-catalogue::before {
+      content: '☕';
+      font-size: 1rem;
+    }
+    .btn-catalogue:hover {
+      background: var(--gold);
+      color: var(--dark);
+      transform: translateY(-1px);
+    }
+
+    /* Floating catalogue badge */
+    .catalogue-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+    @keyframes floatPulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .catalogue-float-icon {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8a7035, var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+      border: 1.5px solid rgba(201,168,76,0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .catalogue-float:hover .catalogue-float-icon {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(201,168,76,0.6);
+    }
+    .catalogue-float-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(10,10,10,0.8);
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .catalogue-float-dot {
+      position: absolute;
+      top: 2px; right: 2px;
+      width: 12px; height: 12px;
+      background: #2ecc71;
+      border-radius: 50%;
+      border: 2px solid var(--dark);
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+    @media (max-width: 768px) {
+      .catalogue-float { bottom: 20px; right: 16px; }
+      .catalogue-float-icon { width: 50px; height: 50px; font-size: 1.3rem; }
+    }
   </style>
 </head>
 <body>
@@ -888,6 +973,7 @@
     <p class="hero-subtitle" data-en="Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust." data-nl="Excorp Distribution verbindt wereldklasse consumentengoederen merken met markten die kwaliteit eisen. Wij leveren met precisie, integriteit en een erfenis van vertrouwen.">Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.</p>
     <div class="hero-cta">
       <a href="#products" class="btn-primary" data-en="Our Products" data-nl="Onze Producten">Our Products</a>
+      <a href="excorp_catalogue.html" class="btn-catalogue" data-en="Browse Catalogue" data-nl="Bekijk Catalogus">Browse Catalogue</a>
       <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
     </div>
   </section>
@@ -996,7 +1082,7 @@
       <div class="contact-details reveal">
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Email" data-nl="E-mail">Email</span>
-          <span class="contact-detail-value"><a href="mailto:farhan@excorpdistribution.nl">farhan@excorpdistribution.nl</a></span>
+          <span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection#5c3a3d2e343d321c39243f332e2c38352f282e353e2928353332723230"><span class="__cf_email__" data-cfemail="3d5b5c4f555c537d58455e524f4d59544e494f545f4849545253135351">[email&#160;protected]</span></a></span>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Phone" data-nl="Telefoon">Phone</span>
@@ -1094,7 +1180,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ─── MENU ───
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
@@ -1267,10 +1353,4 @@
         el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
       });
       const labels = { en: ['Our products','Become a partner','Location','Place an order'], nl: ['Onze producten','Word partner','Locatie','Bestelling plaatsen'] };
-      document.querySelectorAll('.suggestion-btn').forEach((btn, i) => { if (labels[lang][i]) btn.textContent = labels[lang][i]; });
-      const ci = document.getElementById('chatInput');
-      if (ci) ci.placeholder = lang === 'nl' ? 'Vraag naar onze producten...' : 'Ask about our products...';
-    }
-  </script>
-</body>
-</html>
+      document.querySelectorAll('.suggestion-btn').forEach((btn, i) =>
