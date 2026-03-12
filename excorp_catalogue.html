@@ -613,11 +613,9 @@
     /* ─── WHATSAPP BUTTON ─── */
     .whatsapp-btn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 2rem; right: 2rem;
       z-index: 9000;
-      width: 58px;
-      height: 58px;
+      width: 58px; height: 58px;
       background: #25D366;
       border-radius: 50%;
       display: flex;
@@ -627,10 +625,7 @@
       transition: transform 0.3s, box-shadow 0.3s;
       text-decoration: none;
     }
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
-    }
+    .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
     .whatsapp-btn svg { width: 30px; height: 30px; fill: white; }
     .whatsapp-tooltip {
       position: absolute;
@@ -652,11 +647,9 @@
     /* ─── AI CHATBOT ─── */
     .chat-btn {
       position: fixed;
-      bottom: 2rem;
-      left: 2rem;
+      bottom: 2rem; left: 2rem;
       z-index: 9000;
-      width: 58px;
-      height: 58px;
+      width: 58px; height: 58px;
       background: var(--gold);
       border-radius: 50%;
       display: flex;
@@ -667,18 +660,13 @@
       border: none;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .chat-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 28px rgba(201,168,76,0.5);
-    }
+    .chat-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(201,168,76,0.5); }
     .chat-btn svg { width: 26px; height: 26px; fill: var(--dark); }
 
     .chat-window {
       position: fixed;
-      bottom: 6.5rem;
-      left: 2rem;
-      width: 340px;
-      max-height: 480px;
+      bottom: 6.5rem; left: 2rem;
+      width: 340px; max-height: 480px;
       background: var(--dark-2);
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 4px;
@@ -689,7 +677,6 @@
       overflow: hidden;
     }
     .chat-window.open { display: flex; }
-
     .chat-header {
       background: var(--dark-3);
       border-bottom: 1px solid rgba(201,168,76,0.15);
@@ -698,108 +685,34 @@
       align-items: center;
       justify-content: space-between;
     }
-    .chat-header-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-    }
-    .chat-header-sub {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      margin-top: 0.15rem;
-    }
-    .chat-close {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 1.2rem;
-      line-height: 1;
-      transition: color 0.3s;
-    }
+    .chat-header-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.1em; }
+    .chat-header-sub { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 0.15rem; }
+    .chat-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; line-height: 1; transition: color 0.3s; }
     .chat-close:hover { color: var(--gold); }
-
     .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      scroll-behavior: smooth;
+      flex: 1; overflow-y: auto; padding: 1.2rem;
+      display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;
     }
     .chat-messages::-webkit-scrollbar { width: 4px; }
     .chat-messages::-webkit-scrollbar-track { background: transparent; }
     .chat-messages::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
-
-    .msg {
-      max-width: 85%;
-      font-size: 0.78rem;
-      line-height: 1.6;
-      padding: 0.7rem 1rem;
-      border-radius: 2px;
-    }
-    .msg.bot {
-      background: var(--dark-3);
-      border-left: 2px solid var(--gold-dim);
-      color: var(--off-white);
-      align-self: flex-start;
-    }
-    .msg.user {
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.2);
-      color: var(--off-white);
-      align-self: flex-end;
-      text-align: right;
-    }
-    .msg.typing { opacity: 0.6; font-style: italic; }
-
-    .chat-suggestions {
-      padding: 0 1.2rem 0.8rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .msg { max-width: 85%; font-size: 0.78rem; line-height: 1.6; padding: 0.7rem 1rem; border-radius: 2px; }
+    .msg.bot { background: var(--dark-3); border-left: 2px solid var(--gold-dim); color: var(--off-white); align-self: flex-start; }
+    .msg.user { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.2); color: var(--off-white); align-self: flex-end; text-align: right; }
+    .chat-suggestions { padding: 0 1.2rem 0.8rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .suggestion-btn {
-      background: transparent;
-      border: 1px solid rgba(201,168,76,0.25);
-      color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      padding: 0.4rem 0.8rem;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: background 0.3s;
+      background: transparent; border: 1px solid rgba(201,168,76,0.25); color: var(--gold);
+      font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em;
+      padding: 0.4rem 0.8rem; cursor: pointer; border-radius: 2px; transition: background 0.3s;
     }
     .suggestion-btn:hover { background: rgba(201,168,76,0.1); }
-
-    .chat-input-row {
-      display: flex;
-      border-top: 1px solid rgba(201,168,76,0.1);
-    }
+    .chat-input-row { display: flex; border-top: 1px solid rgba(201,168,76,0.1); }
     .chat-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--off-white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      padding: 0.9rem 1.2rem;
-      outline: none;
+      flex: 1; background: transparent; border: none; color: var(--off-white);
+      font-family: 'Montserrat', sans-serif; font-size: 0.78rem; padding: 0.9rem 1.2rem; outline: none;
     }
     .chat-input::placeholder { color: var(--text-muted); }
-    .chat-send {
-      background: var(--gold);
-      border: none;
-      color: var(--dark);
-      padding: 0 1.2rem;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
+    .chat-send { background: var(--gold); border: none; color: var(--dark); padding: 0 1.2rem; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
     .chat-send:hover { background: var(--gold-light); }
 
     /* ─── ANIMATIONS ─── */
@@ -835,13 +748,13 @@
       .map-wrapper { height: 280px; }
       .chat-window { left: 1rem; right: 1rem; width: auto; }
     }
-
     @media (max-width: 480px) {
       .hero-title { font-size: 2.8rem; }
       .about-values { grid-template-columns: 1fr; }
       .hero-cta { flex-direction: column; align-items: flex-start; }
     }
 
+    /* ─── CATALOGUE BUTTON ─── */
     .btn-catalogue {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 14px 28px;
@@ -857,7 +770,7 @@
     }
     .btn-catalogue:hover { background: var(--gold); color: var(--dark); }
     .catalogue-float {
-      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      position: fixed; bottom: 100px; right: 2rem; z-index: 999;
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       text-decoration: none;
     }
@@ -886,11 +799,9 @@
   </style>
 </head>
 <body>
-  <!-- CURSOR -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- NAV -->
   <nav>
     <a href="#home" class="nav-logo">EXCORP DISTRIBUTION</a>
     <ul class="nav-links">
@@ -914,7 +825,6 @@
     </button>
   </nav>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="closeMenu()">Home</a>
     <a href="#about" onclick="closeMenu()">About</a>
@@ -957,7 +867,7 @@
       <div class="about-video-wrap">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg/1200px-2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg"
-          alt="Automated product packaging machinery on factory line"
+          alt="Distribution warehouse"
           onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
         />
       </div>
@@ -1039,7 +949,7 @@
       <div class="contact-details reveal">
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Email" data-nl="E-mail">Email</span>
-          <span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection#3056514258515e705548535f4240545943444259524544595f5e1e5e5c"><span class="__cf_email__" data-cfemail="a7c1c6d5cfc6c9e7c2dfc4c8d5d7c3ced4d3d5cec5d2d3cec8c989c9cb">[email&#160;protected]</span></a></span>
+          <span class="contact-detail-value"><a href="mailto:farhan@excorpdistribution.nl">farhan@excorpdistribution.nl</a></span>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Phone" data-nl="Telefoon">Phone</span>
@@ -1077,9 +987,7 @@
     <div class="map-wrapper">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2455.123!2d4.6913!3d51.8126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c4338b1e5d7c1b%3A0x0!2sLaan+van+Europa+370%2C+3317+DB+Dordrecht!5e0!3m2!1sen!2snl!4v1"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
     </div>
   </div>
@@ -1104,15 +1012,15 @@
     <p class="footer-copy">© 2025 Excorp Distribution. All rights reserved.</p>
   </footer>
 
-  <!-- WHATSAPP FLOATING BUTTON -->
+  <!-- WHATSAPP FLOATING -->
   <a href="https://wa.me/31615272396" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp">
     <span class="whatsapp-tooltip">Chat with us</span>
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <!-- AI CHATBOT BUTTON -->
+  <!-- AI CHAT BUTTON -->
   <button class="chat-btn" onclick="toggleChat()" title="Product Assistant">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
   </button>
 
   <!-- AI CHAT WINDOW -->
@@ -1137,12 +1045,19 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ─── MENU ───
+  <!-- FLOATING CATALOGUE -->
+  <a href="excorp_catalogue.html" class="catalogue-float" title="Browse our product catalogue">
+    <div style="position:relative;">
+      <div class="catalogue-float-icon">☕</div>
+      <div class="catalogue-float-dot"></div>
+    </div>
+    <div class="catalogue-float-label">View Catalogue</div>
+  </a>
+
+  <script>
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
 
-    // ─── CONTACT FORM ───
     function sendEnquiry() {
       const name = document.getElementById('fname').value;
       const company = document.getElementById('fcompany').value;
@@ -1154,19 +1069,15 @@
       window.location.href = `mailto:farhan@excorpdistribution.nl?subject=${subject}&body=${body}`;
     }
 
-    // ─── SCROLL REVEAL ───
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
 
-    // ─── CURSOR TRAIL ───
     const dot = document.getElementById('cursorDot');
     const ring = document.getElementById('cursorRing');
-    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-    let lastTrailX = 0, lastTrailY = 0;
-
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, lastTrailX = 0, lastTrailY = 0;
     document.addEventListener('mousemove', e => {
       mouseX = e.clientX; mouseY = e.clientY;
       dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
@@ -1180,29 +1091,26 @@
         setTimeout(() => p.remove(), 550);
       }
     });
-
     (function animateRing() {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
       ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
       requestAnimationFrame(animateRing);
     })();
-
     document.documentElement.style.cursor = 'none';
     document.querySelectorAll('a, button, input, textarea').forEach(el => el.style.cursor = 'none');
 
-    // ─── 3D CARD TILT ───
     document.querySelectorAll('.product-card').forEach(card => {
       const shine = card.querySelector('.tilt-shine');
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
-        const dx = (e.clientX - r.left - r.width/2)  / (r.width/2);
-        const dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
+        const dx = (e.clientX - r.left - r.width/2) / (r.width/2);
+        const dy = (e.clientY - r.top - r.height/2) / (r.height/2);
         card.style.transform = `perspective(800px) rotateX(${dy * -10}deg) rotateY(${dx * 10}deg) scale3d(1.02,1.02,1.02)`;
         card.style.transition = 'transform 0.08s ease';
         if (shine) {
           const px = ((e.clientX - r.left) / r.width) * 100;
-          const py = ((e.clientY - r.top)  / r.height) * 100;
+          const py = ((e.clientY - r.top) / r.height) * 100;
           shine.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(201,168,76,0.15), transparent 65%)`;
           shine.style.opacity = '1';
         }
@@ -1214,56 +1122,44 @@
       });
     });
 
-    // ─── AI CHATBOT ───
-    const botKnowledge = {
-      greetings: ['hello','hi','hey','good morning','good afternoon','hallo','goedemorgen','goedemiddag'],
-      products: ['product','distribute','sell','offer','beverages','food','grocery','personal care','home','cleaning','drink','snack','dranken','voeding','verzorging'],
-      partner: ['partner','brand','distributor','work together','collaborate','join','retailer','supplier','samenwerken','merk','leverancier'],
-      location: ['location','address','where','find you','based','dordrecht','netherlands','locatie','adres','nederland'],
-      order: ['order','purchase','buy','enquiry','enquire','how to','get started','contact','bestelling','kopen','aanvraag'],
-      contact: ['email','phone','whatsapp','contact','reach','call','bellen','bereiken'],
-    };
-
     const botResponses = {
-      greetings: "Hello! Welcome to Excorp Distribution 👋 I'm here to help you find the right products or partnerships. What can I help you with today?",
-      products: "We distribute 4 premium product categories:\n\n🥤 Beverages — soft drinks, juices, energy drinks\n🛒 Food & Grocery — pantry staples, snacks, dairy\n🧴 Personal Care — skincare, haircare, hygiene\n🏠 Home & Cleaning — detergents, household essentials\n\nAll sourced from globally trusted FMCG brands. Which category interests you most?",
-      partner: "We'd love to work with you! Whether you're a brand looking for distribution or a retailer seeking premium FMCG products, Excorp is your partner of choice.\n\nYou can reach us at:\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form on this page.",
-      location: "We are based in Dordrecht, The Netherlands:\n\n📍 Laan van Europa 370\n3317DB Dordrecht\nThe Netherlands\n\nYou can see our location on the map below the contact section.",
-      order: "Getting started is easy! You can:\n\n1. Fill in the contact form on this page\n2. Email us at farhan@excorpdistribution.nl\n3. WhatsApp us at +31 6 15272396\n\nOur team will get back to you within 24 hours.",
-      contact: "You can reach us through:\n\n📧 Email: farhan@excorpdistribution.nl\n📞 Phone: +31 6 81549755\n💬 WhatsApp: +31 6 15272396\n🔗 LinkedIn: Farhan Din\n\nWe're happy to help!",
-      default: "Thanks for your message! For detailed enquiries, please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396\n\nOr scroll up to fill in our contact form and we'll get back to you within 24 hours.",
+      greetings: "Hello! Welcome to Excorp Distribution 👋 How can I help you today?",
+      products: "We distribute 4 premium categories:\n\n🥤 Beverages\n🛒 Food & Grocery\n🧴 Personal Care\n🏠 Home & Cleaning\n\nWhich interests you most?",
+      partner: "We'd love to work with you!\n\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form.",
+      location: "📍 Laan van Europa 370\n3317DB Dordrecht\nThe Netherlands",
+      order: "Getting started is easy:\n\n1. Fill in the contact form\n2. Email: farhan@excorpdistribution.nl\n3. WhatsApp: +31 6 15272396\n\nWe reply within 24 hours.",
+      default: "Thanks! Please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
+    };
+    const botKnowledge = {
+      greetings: ['hello','hi','hey','hallo','goedemorgen'],
+      products: ['product','distribute','sell','beverages','food','care','cleaning','dranken'],
+      partner: ['partner','brand','retailer','supplier','samenwerken'],
+      location: ['location','address','where','dordrecht','netherlands','locatie'],
+      order: ['order','purchase','buy','enquiry','bestelling'],
+      default: []
     };
 
     let chatOpened = false;
-
     function toggleChat() {
       const win = document.getElementById('chatWindow');
       win.classList.toggle('open');
       if (!chatOpened && win.classList.contains('open')) {
         chatOpened = true;
-        setTimeout(() => addBotMessage("Hello! I'm the Excorp assistant 🌟 I can help you find the right products or get in touch with our team. How can I help?"), 400);
+        setTimeout(() => addBotMessage("Hello! I'm the Excorp assistant 🌟 How can I help?"), 400);
       }
     }
-
     function addBotMessage(text) {
       const msgs = document.getElementById('chatMessages');
       const div = document.createElement('div');
-      div.className = 'msg bot';
-      div.style.whiteSpace = 'pre-line';
-      div.textContent = text;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
+      div.className = 'msg bot'; div.style.whiteSpace = 'pre-line'; div.textContent = text;
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
     }
-
     function addUserMessage(text) {
       const msgs = document.getElementById('chatMessages');
       const div = document.createElement('div');
-      div.className = 'msg user';
-      div.textContent = text;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
+      div.className = 'msg user'; div.textContent = text;
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
     }
-
     function getBotResponse(input) {
       const lower = input.toLowerCase();
       for (const [key, keywords] of Object.entries(botKnowledge)) {
@@ -1271,30 +1167,24 @@
       }
       return botResponses.default;
     }
-
     function askQuestion(q) {
       document.getElementById('chatSuggestions').style.display = 'none';
       addUserMessage(q);
       setTimeout(() => {
         const msgs = document.getElementById('chatMessages');
         const typing = document.createElement('div');
-        typing.className = 'msg bot typing';
-        typing.textContent = '...';
-        msgs.appendChild(typing);
-        msgs.scrollTop = msgs.scrollHeight;
+        typing.className = 'msg bot'; typing.textContent = '...';
+        msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
         setTimeout(() => { typing.remove(); addBotMessage(getBotResponse(q)); }, 800);
       }, 300);
     }
-
     function sendChat() {
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
       if (!text) return;
-      input.value = '';
-      askQuestion(text);
+      input.value = ''; askQuestion(text);
     }
 
-    // ─── LANGUAGE TOGGLE ───
     function setLang(lang) {
       const toggle = document.getElementById('langToggle');
       toggle.classList.toggle('nl', lang === 'nl');
@@ -1309,5 +1199,7 @@
       document.querySelectorAll('[data-placeholder-en]').forEach(el => {
         el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
       });
-      const labels = { en: ['Our products','Become a partner','Location','Place an order'], nl: ['Onze producten','Word partner','Locatie','Bestelling plaatsen'] };
-      document.querySelectorAll('.suggestion-btn').forEach((btn, i) =>
+    }
+  </script>
+</body>
+</html>
