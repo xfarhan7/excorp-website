@@ -955,8 +955,8 @@
     <div class="about-image-block reveal">
       <div class="about-video-wrap">
         <img
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80&auto=format&fit=crop"
-          alt="Modern distribution warehouse"
+          src="https://esdst.eu/wp-content/uploads/2024/07/The-Future-of-Work-800x450.jpg"
+          alt="Robotics and automation in industry"
           onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
         />
       </div>
@@ -1038,7 +1038,7 @@
       <div class="contact-details reveal">
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Email" data-nl="E-mail">Email</span>
-          <span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection#3056514258515e705548535f4240545943444259524544595f5e1e5e5c"><span class="__cf_email__" data-cfemail="a7c1c6d5cfc6c9e7c2dfc4c8d5d7c3ced4d3d5cec5d2d3cec8c989c9cb">[email&#160;protected]</span></a></span>
+          <span class="contact-detail-value"><a href="mailto:farhan@excorpdistribution.nl">farhan@excorpdistribution.nl</a></span>
         </div>
         <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Phone" data-nl="Telefoon">Phone</span>
@@ -1136,10 +1136,14 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
     // ─── MENU ───
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+    window.toggleMenu = toggleMenu;
+    window.closeMenu = closeMenu;
 
     // ─── CONTACT FORM ───
     function sendEnquiry() {
@@ -1310,3 +1314,16 @@
       });
       const labels = { en: ['Our products','Become a partner','Location','Place an order'], nl: ['Onze producten','Word partner','Locatie','Bestelling plaatsen'] };
       document.querySelectorAll('.suggestion-btn').forEach((btn, i) =>
+        { if (labels[lang][i]) btn.textContent = labels[lang][i]; }
+      );
+    }
+    window.setLang = setLang;
+    window.sendEnquiry = sendEnquiry;
+    window.toggleChat = toggleChat;
+    window.askQuestion = askQuestion;
+    window.sendChat = sendChat;
+
+    }); // end DOMContentLoaded
+  </script>
+</body>
+</html>
