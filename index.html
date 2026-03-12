@@ -18,716 +18,154 @@
       --off-white: #F5F0E8;
       --text-muted: #888;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--off-white); font-family: 'Montserrat', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-    body {
-      background: var(--dark);
-      color: var(--off-white);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 4rem;
-      background: rgba(10,10,10,0.97);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-decoration: none;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; letter-spacing: 0.15em; color: var(--gold); text-decoration: none; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: var(--off-white);
-      text-decoration: none;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      transition: opacity 0.3s, color 0.3s;
-    }
+    .nav-links a { color: var(--off-white); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; transition: opacity 0.3s, color 0.3s; }
     .nav-links a:hover { opacity: 1; color: var(--gold); }
-
     .nav-social { display: flex; gap: 1rem; align-items: center; }
-    .nav-social a {
-      color: var(--text-muted);
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-    }
+    .nav-social a { color: var(--text-muted); transition: color 0.3s; display: flex; align-items: center; }
     .nav-social a:hover { color: var(--gold); }
     .nav-social svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* ─── LANG TOGGLE ─── */
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      background: var(--dark-3);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 2px;
-      padding: 3px;
-      gap: 2px;
-      position: relative;
-      margin-left: 1.5rem;
-    }
-    .lang-toggle button {
-      position: relative;
-      z-index: 1;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.35rem 0.85rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      transition: color 0.25s;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      white-space: nowrap;
-    }
+    .lang-toggle { display: flex; align-items: center; background: var(--dark-3); border: 1px solid rgba(201,168,76,0.2); border-radius: 2px; padding: 3px; gap: 2px; position: relative; margin-left: 1.5rem; }
+    .lang-toggle button { position: relative; z-index: 1; background: none; border: none; cursor: pointer; padding: 0.35rem 0.85rem; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); transition: color 0.25s; display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
     .lang-toggle button.active { color: var(--dark); }
-    .lang-slider {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      height: calc(100% - 6px);
-      width: calc(50% - 3px);
-      background: var(--gold);
-      border-radius: 1px;
-      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    }
+    .lang-slider { position: absolute; top: 3px; left: 3px; height: calc(100% - 6px); width: calc(50% - 3px); background: var(--gold); border-radius: 1px; transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
     .lang-toggle.nl .lang-slider { transform: translateX(100%); }
 
-    /* ─── CURSOR TRAIL ─── */
-    .cursor-dot {
-      position: fixed;
-      width: 8px; height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: screen;
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(201,168,76,0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99998;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, border-color 0.2s;
-    }
-    body:has(a:hover) .cursor-ring,
-    body:has(button:hover) .cursor-ring {
-      width: 52px; height: 52px;
-      border-color: var(--gold);
-    }
-    .cursor-trail-particle {
-      position: fixed;
-      width: 4px; height: 4px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99997;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      animation: trailFade 0.5s ease forwards;
-    }
-    @keyframes trailFade {
-      0%   { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0;   transform: translate(-50%, -50%) scale(0); }
-    }
+    .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); mix-blend-mode: screen; }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, border-color 0.2s; }
+    body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: var(--gold); }
+    .cursor-trail-particle { position: fixed; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 99997; transform: translate(-50%, -50%); opacity: 0; animation: trailFade 0.5s ease forwards; }
+    @keyframes trailFade { 0% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); } 100% { opacity: 0; transform: translate(-50%,-50%) scale(0); } }
 
-    /* ─── 3D CARD TILT ─── */
-    .tilt-shine {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.1), transparent 65%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
+    .tilt-shine { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.1), transparent 65%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
 
-    /* ─── AI THINKING DOTS ─── */
-    .chat-thinking {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-      padding: 0.8rem 1rem;
-      align-self: flex-start;
-    }
-    .chat-thinking span {
-      width: 6px; height: 6px;
-      background: var(--gold-dim);
-      border-radius: 50%;
-      animation: thinkBounce 1.1s infinite;
-    }
-    .chat-thinking span:nth-child(2) { animation-delay: 0.18s; }
-    .chat-thinking span:nth-child(3) { animation-delay: 0.36s; }
-    @keyframes thinkBounce {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-      30% { transform: translateY(-7px); opacity: 1; }
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 65px; left: 0; right: 0;
-      background: rgba(10,10,10,0.98);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 2rem;
-      z-index: 999;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    .mobile-menu { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(10,10,10,0.98); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 2rem; z-index: 999; flex-direction: column; gap: 1.5rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      color: var(--off-white);
-      text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
+    .mobile-menu a { color: var(--off-white); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
     .mobile-menu a:hover { color: var(--gold); opacity: 1; }
 
-    /* ─── HERO ─── */
-    #home {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 8rem 4rem 4rem;
-      position: relative;
-      background:
-        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
-        linear-gradient(135deg, #0a0a0a 0%, #111108 100%);
-    }
-    .hero-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s ease 0.2s both;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 300;
-      line-height: 1.05;
-      max-width: 700px;
-      animation: fadeUp 0.9s ease 0.4s both;
-    }
+    #home { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 8rem 4rem 4rem; position: relative; background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #111108 100%); }
+    .hero-tag { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; animation: fadeUp 0.8s ease 0.2s both; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 300; line-height: 1.05; max-width: 700px; animation: fadeUp 0.9s ease 0.4s both; }
     .hero-title em { font-style: italic; color: var(--gold); }
-    .hero-subtitle {
-      margin-top: 2rem;
-      max-width: 420px;
-      font-size: 0.85rem;
-      line-height: 1.9;
-      color: var(--text-muted);
-      animation: fadeUp 0.9s ease 0.6s both;
-    }
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-      animation: fadeUp 0.9s ease 0.8s both;
-    }
-    .btn-primary {
-      padding: 0.85rem 2.5rem;
-      background: var(--gold);
-      color: var(--dark);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-      display: inline-block;
-    }
+    .hero-subtitle { margin-top: 2rem; max-width: 420px; font-size: 0.85rem; line-height: 1.9; color: var(--text-muted); animation: fadeUp 0.9s ease 0.6s both; }
+    .hero-cta { margin-top: 3rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; animation: fadeUp 0.9s ease 0.8s both; }
+    .btn-primary { padding: 0.85rem 2.5rem; background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, transform 0.2s; display: inline-block; }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn-ghost {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--off-white);
-      text-decoration: none;
-      opacity: 0.6;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .btn-ghost { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--off-white); text-decoration: none; opacity: 0.6; transition: opacity 0.3s; display: flex; align-items: center; gap: 0.6rem; }
     .btn-ghost::after { content: '→'; font-size: 1rem; }
     .btn-ghost:hover { opacity: 1; }
 
-    /* ─── STATS ─── */
-    .stats-bar {
-      background: var(--dark-3);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: space-around;
-      gap: 2rem;
-      text-align: center;
-      flex-wrap: wrap;
-    }
-    .stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 400;
-      color: var(--gold);
-      line-height: 1;
-      letter-spacing: 0.05em;
-    }
-    .stat-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
+    .stats-bar { background: var(--dark-3); border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 3rem 4rem; display: flex; justify-content: space-around; gap: 2rem; text-align: center; flex-wrap: wrap; }
+    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 400; color: var(--gold); line-height: 1; letter-spacing: 0.05em; }
+    .stat-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
 
-    /* ─── SECTION SHARED ─── */
     section { padding: 8rem 4rem; position: relative; }
-    .section-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 2rem;
-    }
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      margin-bottom: 2.5rem;
-    }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 2rem; }
+    .divider { width: 60px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin-bottom: 2.5rem; }
 
-    /* ─── ABOUT ─── */
-    #about {
-      background: var(--dark-2);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-    }
+    #about { background: var(--dark-2); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about-image-block { position: relative; height: 500px; overflow: hidden; }
-    .about-image-block img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.85) sepia(0.1);
-    }
-    .about-video-wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    .about-video-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.75) sepia(0.15);
-    }
-    .about-visual-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, #0d0d0a 0%, #1a1a10 40%, #111108 100%);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .about-visual-placeholder::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px),
-        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 41px);
-    }
-    .about-visual-placeholder::after {
-      content: ''; position: absolute;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-    }
-    .about-visual-inner { position: relative; z-index: 1; text-align: center; }
-    .visual-icon { font-size: 4rem; opacity: 0.35; margin-bottom: 1.5rem; display: block; }
-    .visual-lines { display: flex; gap: 6px; justify-content: center; }
-    .visual-lines span { display: block; width: 3px; background: var(--gold); border-radius: 2px; animation: barPulse 1.4s ease-in-out infinite; }
-    .visual-lines span:nth-child(1) { height: 30px; animation-delay: 0s; }
-    .visual-lines span:nth-child(2) { height: 50px; animation-delay: 0.2s; }
-    .visual-lines span:nth-child(3) { height: 70px; animation-delay: 0.4s; }
-    .visual-lines span:nth-child(4) { height: 50px; animation-delay: 0.6s; }
-    .visual-lines span:nth-child(5) { height: 30px; animation-delay: 0.8s; }
-    @keyframes barPulse {
-      0%, 100% { opacity: 0.15; transform: scaleY(0.8); }
-      50% { opacity: 0.5; transform: scaleY(1); }
-    }
-    .about-accent-box {
-      position: absolute;
-      bottom: -2rem; right: -2rem;
-      width: 40%; height: 45%;
-      border: 1px solid rgba(201,168,76,0.25);
-      background: rgba(201,168,76,0.03);
-      pointer-events: none;
-    }
-    .about-accent-box::after {
-      content: 'EST. 2023';
-      position: absolute;
-      bottom: 1.5rem; left: 1.5rem;
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      color: var(--gold-dim);
-    }
-    .about-text p {
-      font-size: 0.85rem;
-      line-height: 2;
-      color: rgba(245,240,232,0.7);
-      margin-bottom: 1.5rem;
-    }
-    .about-values {
-      margin-top: 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
+    .about-video-wrap { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .about-video-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.75) sepia(0.15); }
+    .about-visual-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #0d0d0a 0%, #1a1a10 40%, #111108 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .about-accent-box { position: absolute; bottom: -2rem; right: -2rem; width: 40%; height: 45%; border: 1px solid rgba(201,168,76,0.25); background: rgba(201,168,76,0.03); pointer-events: none; }
+    .about-accent-box::after { content: 'EST. 2023'; position: absolute; bottom: 1.5rem; left: 1.5rem; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold-dim); }
+    .about-text p { font-size: 0.85rem; line-height: 2; color: rgba(245,240,232,0.7); margin-bottom: 1.5rem; }
+    .about-values { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .value-item { border-left: 1px solid var(--gold-dim); padding-left: 1rem; }
-    .value-title {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
+    .value-title { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
     .value-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; }
 
-    /* ─── PRODUCTS ─── */
     #products { background: var(--dark); }
     .products-header { margin-bottom: 4rem; }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5px;
-      background: rgba(201,168,76,0.08);
-    }
-    .product-card {
-      background: var(--dark-2);
-      padding: 3rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.4s;
-    }
-    .product-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
+    .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: rgba(201,168,76,0.08); }
+    .product-card { background: var(--dark-2); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background 0.4s; }
+    .product-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
     .product-card:hover { background: #161612; }
     .product-card:hover::before { transform: scaleX(1); }
     .product-icon { font-size: 2rem; margin-bottom: 1.5rem; opacity: 0.7; }
-    .product-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
+    .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; }
     .product-desc { font-size: 0.75rem; line-height: 1.9; color: var(--text-muted); }
-    .product-number {
-      position: absolute;
-      top: 2rem; right: 2.5rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      color: rgba(201,168,76,0.06);
-      font-weight: 600;
-    }
+    .product-number { position: absolute; top: 2rem; right: 2.5rem; font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: rgba(201,168,76,0.06); font-weight: 600; }
 
-    /* ─── CONTACT ─── */
-    #contact {
-      background: var(--dark-2);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-    .contact-info p {
-      font-size: 0.85rem;
-      line-height: 2;
-      color: rgba(245,240,232,0.6);
-      margin-bottom: 2.5rem;
-    }
+    #contact { background: var(--dark-2); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-info p { font-size: 0.85rem; line-height: 2; color: rgba(245,240,232,0.6); margin-bottom: 2.5rem; }
     .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
     .contact-detail-item { display: flex; flex-direction: column; gap: 0.3rem; }
-    .contact-detail-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
+    .contact-detail-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
     .contact-detail-value { font-size: 0.85rem; color: var(--off-white); opacity: 0.8; }
     .contact-detail-value a { color: inherit; text-decoration: none; }
     .contact-detail-value a:hover { color: var(--gold); }
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    .form-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-    }
-    .form-input, .form-textarea {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(201,168,76,0.2);
-      color: var(--off-white);
-      padding: 0.9rem 1.2rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 300;
-      outline: none;
-      transition: border-color 0.3s;
-      width: 100%;
-    }
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.04);
-    }
+    .form-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); }
+    .form-input, .form-textarea { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2); color: var(--off-white); padding: 0.9rem 1.2rem; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 300; outline: none; transition: border-color 0.3s; width: 100%; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); background: rgba(201,168,76,0.04); }
     .form-textarea { resize: vertical; min-height: 130px; }
-    .form-submit {
-      align-self: flex-start;
-      padding: 0.9rem 2.8rem;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s;
-    }
+    .form-submit { align-self: flex-start; padding: 0.9rem 2.8rem; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, color 0.3s; }
     .form-submit:hover { background: var(--gold); color: var(--dark); }
 
-    /* ─── GOOGLE MAP ─── */
-    #map-section {
-      background: var(--dark);
-      padding: 0;
-    }
-    .map-wrapper {
-      width: 100%;
-      height: 400px;
-      border-top: 1px solid rgba(201,168,76,0.15);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      filter: grayscale(0.3) contrast(1.1);
-    }
+    #map-section { background: var(--dark); padding: 0; }
+    .map-wrapper { width: 100%; height: 400px; border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); filter: grayscale(0.3) contrast(1.1); }
     .map-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid rgba(201,168,76,0.12);
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-    }
+    footer { background: var(--dark); border-top: 1px solid rgba(201,168,76,0.12); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--gold); letter-spacing: 0.15em; }
     .footer-copy { font-size: 0.65rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
-    .footer-links a {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    .footer-links a { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
     .footer-links a:hover { color: var(--gold); }
     .footer-social { display: flex; gap: 1rem; align-items: center; }
-    .footer-social a {
-      color: var(--text-muted);
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-    }
+    .footer-social a { color: var(--text-muted); transition: color 0.3s; display: flex; align-items: center; }
     .footer-social a:hover { color: var(--gold); }
     .footer-social svg { width: 18px; height: 18px; fill: currentColor; }
 
-    /* ─── WHATSAPP BUTTON ─── */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 2rem; right: 2rem;
-      z-index: 9000;
-      width: 58px; height: 58px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-decoration: none;
-    }
+    .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; z-index: 9000; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; }
     .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
     .whatsapp-btn svg { width: 30px; height: 30px; fill: white; }
-    .whatsapp-tooltip {
-      position: absolute;
-      right: 68px;
-      background: rgba(10,10,10,0.9);
-      color: var(--off-white);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      padding: 0.5rem 1rem;
-      border-radius: 2px;
-      white-space: nowrap;
-      border: 1px solid rgba(201,168,76,0.2);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
+    .whatsapp-tooltip { position: absolute; right: 68px; background: rgba(10,10,10,0.9); color: var(--off-white); font-size: 0.7rem; letter-spacing: 0.1em; padding: 0.5rem 1rem; border-radius: 2px; white-space: nowrap; border: 1px solid rgba(201,168,76,0.2); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .whatsapp-btn:hover .whatsapp-tooltip { opacity: 1; }
 
-    /* ─── AI CHATBOT ─── */
-    .chat-btn {
-      position: fixed;
-      bottom: 2rem; left: 2rem;
-      z-index: 9000;
-      width: 58px; height: 58px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
-      cursor: pointer;
-      border: none;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+    .chat-btn { position: fixed; bottom: 2rem; left: 2rem; z-index: 9000; width: 58px; height: 58px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(201,168,76,0.35); cursor: pointer; border: none; transition: transform 0.3s, box-shadow 0.3s; }
     .chat-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(201,168,76,0.5); }
     .chat-btn svg { width: 26px; height: 26px; fill: var(--dark); }
-
-    .chat-window {
-      position: fixed;
-      bottom: 6.5rem; left: 2rem;
-      width: 340px; max-height: 480px;
-      background: var(--dark-2);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      z-index: 8999;
-      display: none;
-      flex-direction: column;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-      overflow: hidden;
-    }
+    .chat-window { position: fixed; bottom: 6.5rem; left: 2rem; width: 340px; max-height: 480px; background: var(--dark-2); border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; z-index: 8999; display: none; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
     .chat-window.open { display: flex; }
-    .chat-header {
-      background: var(--dark-3);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 1rem 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .chat-header { background: var(--dark-3); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; }
     .chat-header-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.1em; }
     .chat-header-sub { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 0.15rem; }
     .chat-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; line-height: 1; transition: color 0.3s; }
     .chat-close:hover { color: var(--gold); }
-    .chat-messages {
-      flex: 1; overflow-y: auto; padding: 1.2rem;
-      display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth;
-    }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth; }
     .chat-messages::-webkit-scrollbar { width: 4px; }
-    .chat-messages::-webkit-scrollbar-track { background: transparent; }
     .chat-messages::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
     .msg { max-width: 85%; font-size: 0.78rem; line-height: 1.6; padding: 0.7rem 1rem; border-radius: 2px; }
     .msg.bot { background: var(--dark-3); border-left: 2px solid var(--gold-dim); color: var(--off-white); align-self: flex-start; }
     .msg.user { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.2); color: var(--off-white); align-self: flex-end; text-align: right; }
     .chat-suggestions { padding: 0 1.2rem 0.8rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .suggestion-btn {
-      background: transparent; border: 1px solid rgba(201,168,76,0.25); color: var(--gold);
-      font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em;
-      padding: 0.4rem 0.8rem; cursor: pointer; border-radius: 2px; transition: background 0.3s;
-    }
+    .suggestion-btn { background: transparent; border: 1px solid rgba(201,168,76,0.25); color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.4rem 0.8rem; cursor: pointer; border-radius: 2px; transition: background 0.3s; }
     .suggestion-btn:hover { background: rgba(201,168,76,0.1); }
     .chat-input-row { display: flex; border-top: 1px solid rgba(201,168,76,0.1); }
-    .chat-input {
-      flex: 1; background: transparent; border: none; color: var(--off-white);
-      font-family: 'Montserrat', sans-serif; font-size: 0.78rem; padding: 0.9rem 1.2rem; outline: none;
-    }
+    .chat-input { flex: 1; background: transparent; border: none; color: var(--off-white); font-family: 'Montserrat', sans-serif; font-size: 0.78rem; padding: 0.9rem 1.2rem; outline: none; }
     .chat-input::placeholder { color: var(--text-muted); }
     .chat-send { background: var(--gold); border: none; color: var(--dark); padding: 0 1.2rem; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
     .chat-send:hover { background: var(--gold-light); }
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
@@ -753,49 +191,6 @@
       .about-values { grid-template-columns: 1fr; }
       .hero-cta { flex-direction: column; align-items: flex-start; }
     }
-
-    /* ─── CATALOGUE BUTTON ─── */
-    .btn-catalogue {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 28px;
-      background: transparent;
-      border: 1.5px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-    .btn-catalogue:hover { background: var(--gold); color: var(--dark); }
-    .catalogue-float {
-      position: fixed; bottom: 100px; right: 2rem; z-index: 999;
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      text-decoration: none;
-    }
-    .catalogue-float-icon {
-      width: 58px; height: 58px; border-radius: 50%;
-      background: linear-gradient(135deg, #8a7035, #C9A84C);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 24px rgba(201,168,76,0.4);
-      border: 1.5px solid rgba(201,168,76,0.6);
-      transition: transform 0.2s;
-    }
-    .catalogue-float:hover .catalogue-float-icon { transform: scale(1.1); }
-    .catalogue-float-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.52rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold); background: rgba(10,10,10,0.85);
-      padding: 3px 8px; border-radius: 4px; white-space: nowrap;
-    }
-    .catalogue-float-dot {
-      position: absolute; top: 2px; right: 2px;
-      width: 12px; height: 12px; background: #2ecc71;
-      border-radius: 50%; border: 2px solid #0a0a0a;
-    }
   </style>
 </head>
 <body>
@@ -814,6 +209,7 @@
       <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank" title="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
+      <a href="excorp_catalogue.html" style="display:inline-flex;align-items:center;gap:7px;padding:7px 18px;border:1.5px solid #C9A84C;color:#C9A84C;font-family:Montserrat,sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:all 0.2s;margin-right:0.5rem;" onmouseover="this.style.background='#C9A84C';this.style.color='#0a0a0a'" onmouseout="this.style.background='transparent';this.style.color='#C9A84C'">☕ Catalogue</a>
       <div class="lang-toggle" id="langToggle">
         <div class="lang-slider"></div>
         <button id="btn-en" class="active" onclick="setLang('en')">🇬🇧 EN</button>
@@ -830,22 +226,20 @@
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#products" onclick="closeMenu()">Products</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="excorp_catalogue.html">☕ Catalogue</a>
     <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank">LinkedIn</a>
   </div>
 
-  <!-- HERO -->
   <section id="home">
     <p class="hero-tag" data-en="Premium FMCG Distribution" data-nl="Premium FMCG Distributie">Premium FMCG Distribution</p>
     <h1 class="hero-title"><span data-en="Delivering <em>Excellence</em><br>Across Every Shelf" data-nl="Kwaliteit <em>Leveren</em><br>Op Elk Schap">Delivering <em>Excellence</em><br>Across Every Shelf</span></h1>
     <p class="hero-subtitle" data-en="Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust." data-nl="Excorp Distribution verbindt wereldklasse consumentengoederen merken met markten die kwaliteit eisen. Wij leveren met precisie, integriteit en een erfenis van vertrouwen.">Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.</p>
     <div class="hero-cta">
       <a href="#products" class="btn-primary" data-en="Our Products" data-nl="Onze Producten">Our Products</a>
-      <a href="excorp_catalogue.html" class="btn-catalogue">☕ Browse Catalogue</a>
       <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
     </div>
   </section>
 
-  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat-item reveal">
       <div class="stat-number">Premium</div>
@@ -861,15 +255,10 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-image-block reveal">
       <div class="about-video-wrap">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg/1200px-2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg"
-          alt="Distribution warehouse"
-          onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
-        />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg/1200px-2015-04-09_08_05_09_Product_packaging_machinery_at_Halo_Farms_in_Lawrence%2C_New_Jersey.jpg" alt="Distribution warehouse" onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder></div>'" />
       </div>
       <div class="about-accent-box"></div>
     </div>
@@ -877,8 +266,8 @@
       <p class="section-label reveal" data-en="Our Story" data-nl="Ons Verhaal">Our Story</p>
       <h2 class="section-title reveal" data-en="Built on Trust.<br>Driven by Quality." data-nl="Gebouwd op Vertrouwen.<br>Gedreven door Kwaliteit.">Built on Trust.<br>Driven by Quality.</h2>
       <div class="divider reveal"></div>
-      <p class="reveal" data-en="Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region." data-nl="Excorp Distribution is opgericht met één overtuiging: elke consument verdient toegang tot de beste alledaagse producten. Van huishoudelijke essentials tot premium voeding en dranken, wij verbinden de toonaangevende FMCG-merken met retailnetwerken in de regio.">Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region.</p>
-      <p class="reveal" data-en="Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence." data-nl="Onze logistieke infrastructuur, zorgvuldig samengesteld merkportfolio en onwankelbare toewijding aan tijdige levering hebben ons de distributiepartner bij uitstek gemaakt voor merken die geen compromissen sluiten over kwaliteit.">Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence.</p>
+      <p class="reveal" data-en="Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region." data-nl="Excorp Distribution is opgericht met één overtuiging: elke consument verdient toegang tot de beste alledaagse producten.">Excorp Distribution was founded with a single conviction: that every consumer deserves access to the finest everyday goods. From household essentials to premium food and beverage, we connect the world's leading FMCG brands to retail networks across the region.</p>
+      <p class="reveal" data-en="Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence." data-nl="Onze logistieke infrastructuur en onwankelbare toewijding aan tijdige levering hebben ons de distributiepartner bij uitstek gemaakt.">Our logistics infrastructure, curated brand portfolio, and unwavering commitment to on-time delivery have made us the distribution partner of choice for brands that refuse to compromise on excellence.</p>
       <div class="about-values reveal">
         <div class="value-item">
           <div class="value-title" data-en="Reliability" data-nl="Betrouwbaarheid">Reliability</div>
@@ -900,7 +289,6 @@
     </div>
   </section>
 
-  <!-- PRODUCTS -->
   <section id="products">
     <div class="products-header">
       <p class="section-label reveal" data-en="What We Distribute" data-nl="Wat Wij Distribueren">What We Distribute</p>
@@ -920,14 +308,14 @@
         <div class="product-number">02</div>
         <div class="product-icon">🛒</div>
         <div class="product-name" data-en="Food &amp; Grocery" data-nl="Voeding &amp; Kruidenierswaren">Food &amp; Grocery</div>
-        <div class="product-desc" data-en="Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety." data-nl="Basisproducten, sauzen, snacks, zuivel en verpakte levensmiddelen die voldoen aan de hoogste kwaliteits- en veiligheidsnormen.">Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety.</div>
+        <div class="product-desc" data-en="Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety." data-nl="Basisproducten, sauzen, snacks, zuivel en verpakte levensmiddelen die voldoen aan de hoogste kwaliteitsnormen.">Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.2s">
         <div class="tilt-shine"></div>
         <div class="product-number">03</div>
         <div class="product-icon">🧴</div>
         <div class="product-name" data-en="Personal Care" data-nl="Persoonlijke Verzorging">Personal Care</div>
-        <div class="product-desc" data-en="Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide." data-nl="Huidverzorging, haarverzorging, hygiëne en wellnessproducten van toonaangevende FMCG-merken die wereldwijd door huishoudens worden vertrouwd.">Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide.</div>
+        <div class="product-desc" data-en="Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide." data-nl="Huidverzorging, haarverzorging, hygiëne en wellnessproducten van toonaangevende FMCG-merken.">Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.3s">
         <div class="tilt-shine"></div>
@@ -939,16 +327,15 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-info">
       <p class="section-label reveal" data-en="Reach Out" data-nl="Neem Contact Op">Reach Out</p>
       <h2 class="section-title reveal" data-en="Let's Work<br>Together" data-nl="Laten We<br>Samenwerken">Let's Work<br>Together</h2>
       <div class="divider reveal"></div>
-      <p class="reveal" data-en="Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you. Our team is ready to build a partnership that delivers." data-nl="Of u nu een merk bent dat distributie zoekt of een retailer die premium FMCG-producten wil inkopen, we horen graag van u. Ons team staat klaar om een partnerschap op te bouwen dat resultaten levert.">Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you. Our team is ready to build a partnership that delivers.</p>
+      <p class="reveal" data-en="Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you." data-nl="Of u nu een merk bent dat distributie zoekt of een retailer die premium FMCG-producten wil inkopen, we horen graag van u.">Whether you're a brand seeking distribution or a retailer looking to stock premium FMCG products, we'd love to hear from you.</p>
       <div class="contact-details reveal">
         <div class="contact-detail-item">
-          <span class="contact-detail-label" data-en="Email" data-nl="E-mail">Email</span>
+          <span class="contact-detail-label">Email</span>
           <span class="contact-detail-value"><a href="mailto:farhan@excorpdistribution.nl">farhan@excorpdistribution.nl</a></span>
         </div>
         <div class="contact-detail-item">
@@ -964,11 +351,11 @@
     <div class="contact-form reveal">
       <div class="form-group">
         <label class="form-label" data-en="Full Name" data-nl="Volledige Naam">Full Name</label>
-        <input type="text" class="form-input" id="fname" placeholder="Your name" data-placeholder-en="Your name" data-placeholder-nl="Uw naam" />
+        <input type="text" class="form-input" id="fname" placeholder="Your name" />
       </div>
       <div class="form-group">
         <label class="form-label" data-en="Company" data-nl="Bedrijf">Company</label>
-        <input type="text" class="form-input" id="fcompany" placeholder="Your company" data-placeholder-en="Your company" data-placeholder-nl="Uw bedrijf" />
+        <input type="text" class="form-input" id="fcompany" placeholder="Your company" />
       </div>
       <div class="form-group">
         <label class="form-label" data-en="Email Address" data-nl="E-mailadres">Email Address</label>
@@ -976,54 +363,47 @@
       </div>
       <div class="form-group">
         <label class="form-label" data-en="Message" data-nl="Bericht">Message</label>
-        <textarea class="form-textarea" id="fmessage" placeholder="Tell us about your distribution needs..." data-placeholder-en="Tell us about your distribution needs..." data-placeholder-nl="Vertel ons over uw distributiebehoeften..."></textarea>
+        <textarea class="form-textarea" id="fmessage" placeholder="Tell us about your distribution needs..."></textarea>
       </div>
       <button class="form-submit" onclick="sendEnquiry()" data-en="Send Enquiry" data-nl="Verstuur Aanvraag">Send Enquiry</button>
     </div>
   </section>
 
-  <!-- GOOGLE MAP -->
   <div id="map-section">
     <div class="map-wrapper">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2455.123!2d4.6913!3d51.8126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c4338b1e5d7c1b%3A0x0!2sLaan+van+Europa+370%2C+3317+DB+Dordrecht!5e0!3m2!1sen!2snl!4v1"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2455.123!2d4.6913!3d51.8126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c4338b1e5d7c1b%3A0x0!2sLaan+van+Europa+370%2C+3317+DB+Dordrecht!5e0!3m2!1sen!2snl!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">EXCORP DISTRIBUTION</div>
     <ul class="footer-links">
-      <li><a href="#home" data-en="Home" data-nl="Home">Home</a></li>
+      <li><a href="#home">Home</a></li>
       <li><a href="#about" data-en="About" data-nl="Over Ons">About</a></li>
       <li><a href="#products" data-en="Products" data-nl="Producten">Products</a></li>
-      <li><a href="#contact" data-en="Contact" data-nl="Contact">Contact</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="excorp_catalogue.html">☕ Catalogue</a></li>
     </ul>
     <div class="footer-social">
-      <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank" title="LinkedIn">
+      <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
-      <a href="https://wa.me/31615272396" target="_blank" title="WhatsApp">
+      <a href="https://wa.me/31615272396" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
     </div>
     <p class="footer-copy">© 2025 Excorp Distribution. All rights reserved.</p>
   </footer>
 
-  <!-- WHATSAPP FLOATING -->
-  <a href="https://wa.me/31615272396" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp">
+  <a href="https://wa.me/31615272396" target="_blank" class="whatsapp-btn">
     <span class="whatsapp-tooltip">Chat with us</span>
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <!-- AI CHAT BUTTON -->
-  <button class="chat-btn" onclick="toggleChat()" title="Product Assistant">
+  <button class="chat-btn" onclick="toggleChat()">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
   </button>
 
-  <!-- AI CHAT WINDOW -->
   <div class="chat-window" id="chatWindow">
     <div class="chat-header">
       <div>
@@ -1044,15 +424,6 @@
       <button class="chat-send" onclick="sendChat()">→</button>
     </div>
   </div>
-
-  <!-- FLOATING CATALOGUE -->
-  <a href="excorp_catalogue.html" class="catalogue-float" title="Browse our product catalogue">
-    <div style="position:relative;">
-      <div class="catalogue-float-icon">☕</div>
-      <div class="catalogue-float-dot"></div>
-    </div>
-    <div class="catalogue-float-label">View Catalogue</div>
-  </a>
 
   <script>
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
@@ -1125,18 +496,17 @@
     const botResponses = {
       greetings: "Hello! Welcome to Excorp Distribution 👋 How can I help you today?",
       products: "We distribute 4 premium categories:\n\n🥤 Beverages\n🛒 Food & Grocery\n🧴 Personal Care\n🏠 Home & Cleaning\n\nWhich interests you most?",
-      partner: "We'd love to work with you!\n\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form.",
+      partner: "We'd love to work with you!\n\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396",
       location: "📍 Laan van Europa 370\n3317DB Dordrecht\nThe Netherlands",
       order: "Getting started is easy:\n\n1. Fill in the contact form\n2. Email: farhan@excorpdistribution.nl\n3. WhatsApp: +31 6 15272396\n\nWe reply within 24 hours.",
-      default: "Thanks! Please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
+      default: "Thanks! Please reach out:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
     };
     const botKnowledge = {
-      greetings: ['hello','hi','hey','hallo','goedemorgen'],
-      products: ['product','distribute','sell','beverages','food','care','cleaning','dranken'],
+      greetings: ['hello','hi','hey','hallo'],
+      products: ['product','distribute','beverages','food','care','cleaning','dranken'],
       partner: ['partner','brand','retailer','supplier','samenwerken'],
-      location: ['location','address','where','dordrecht','netherlands','locatie'],
+      location: ['location','address','where','dordrecht','netherlands'],
       order: ['order','purchase','buy','enquiry','bestelling'],
-      default: []
     };
 
     let chatOpened = false;
@@ -1195,9 +565,6 @@
         if (!val) return;
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
         else el.innerHTML = val;
-      });
-      document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-        el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
       });
     }
   </script>
