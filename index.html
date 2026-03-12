@@ -474,7 +474,8 @@
     }
     .product-card:hover { background: #161612; }
     .product-card:hover::before { transform: scaleX(1); }
-    .product-icon { font-size: 2rem; margin-bottom: 1.5rem; opacity: 0.7; }
+    .product-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; opacity: 0.75; }
+    .product-icon svg { width: 100%; height: 100%; stroke: #C9A84C; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
     .product-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
@@ -1000,28 +1001,28 @@
       <div class="product-card reveal">
         <div class="tilt-shine"></div>
         <div class="product-number">01</div>
-        <div class="product-icon">🥤</div>
+        <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M8 2h8M9 2v4.5C9 9 6 11 6 15a6 6 0 0012 0c0-4-3-6-3-8.5V2"/><line x1="6" y1="13" x2="18" y2="13"/></svg></div>
         <div class="product-name" data-en="Beverages" data-nl="Dranken">Beverages</div>
         <div class="product-desc" data-en="Premium soft drinks, juices, water, energy drinks, and functional beverages sourced from globally trusted brands." data-nl="Premium frisdranken, sappen, water, energiedranken en functionele dranken van wereldwijd vertrouwde merken.">Premium soft drinks, juices, water, energy drinks, and functional beverages sourced from globally trusted brands.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.1s">
         <div class="tilt-shine"></div>
         <div class="product-number">02</div>
-        <div class="product-icon">🛒</div>
+        <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="product-name" data-en="Food &amp; Grocery" data-nl="Voeding &amp; Kruidenierswaren">Food &amp; Grocery</div>
         <div class="product-desc" data-en="Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety." data-nl="Basisproducten, sauzen, snacks, zuivel en verpakte levensmiddelen die voldoen aan de hoogste kwaliteits- en veiligheidsnormen.">Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.2s">
         <div class="tilt-shine"></div>
         <div class="product-number">03</div>
-        <div class="product-icon">🧴</div>
+        <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/><path d="M12 22V13M8.5 16.5l3.5-3.5"/></svg></div>
         <div class="product-name" data-en="Personal Care" data-nl="Persoonlijke Verzorging">Personal Care</div>
         <div class="product-desc" data-en="Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide." data-nl="Huidverzorging, haarverzorging, hygiëne en wellnessproducten van toonaangevende FMCG-merken die wereldwijd door huishoudens worden vertrouwd.">Skincare, haircare, hygiene, and wellness products from leading FMCG labels trusted by households worldwide.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.3s">
         <div class="tilt-shine"></div>
         <div class="product-number">04</div>
-        <div class="product-icon">🏠</div>
+        <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <div class="product-name" data-en="Home &amp; Cleaning" data-nl="Huishouden &amp; Reiniging">Home &amp; Cleaning</div>
         <div class="product-desc" data-en="Household cleaning products, detergents, and home care essentials designed for everyday excellence." data-nl="Huishoudelijke reinigingsproducten, wasmiddelen en verzorgingsessentials voor dagelijkse excellentie.">Household cleaning products, detergents, and home care essentials designed for everyday excellence.</div>
       </div>
@@ -1137,7 +1138,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false">
     document.addEventListener('DOMContentLoaded', function() {
 
     // ─── MENU ───
@@ -1320,6 +1321,7 @@
     }
 
     window.toggleMenu  = toggleMenu;
+    window.closeMe
     window.closeMenu   = closeMenu;
     window.sendEnquiry = sendEnquiry;
     window.toggleChat  = toggleChat;
