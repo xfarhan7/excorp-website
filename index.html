@@ -249,7 +249,7 @@
     }
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 8vw, 7rem);
+      font-size: clamp(3rem, 5.5vw, 5rem);
       font-weight: 300;
       line-height: 1.05;
       max-width: 700px;
@@ -1142,219 +1142,213 @@
   </div>
 
   <script data-cfasync="false">
-  (function() {
-    document.addEventListener('DOMContentLoaded', function() {
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
 
-      // ── MENU ──────────────────────────────────────────────
-      function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-      function closeMenu()  { document.getElementById('mobileMenu').classList.remove('open'); }
+    // ── MENU ──────────────────────────────────────────────
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
 
-      // ── CONTACT FORM ──────────────────────────────────────
-      function sendEnquiry() {
-        var name    = document.getElementById('fname').value;
-        var company = document.getElementById('fcompany').value;
-        var email   = document.getElementById('femail').value;
-        var message = document.getElementById('fmessage').value;
-        if (!name || !email) { alert('Please fill in your name and email.'); return; }
-        var subject = encodeURIComponent('Enquiry from ' + name);
-        var body    = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
-        window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
-      }
+    // ── CONTACT FORM ──────────────────────────────────────
+    function sendEnquiry() {
+      var name = document.getElementById('fname').value;
+      var company = document.getElementById('fcompany').value;
+      var email = document.getElementById('femail').value;
+      var message = document.getElementById('fmessage').value;
+      if (!name || !email) { alert('Please fill in your name and email.'); return; }
+      var subject = encodeURIComponent('Enquiry from ' + name);
+      var body = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+      window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
+    }
 
-      // ── SCROLL REVEAL ─────────────────────────────────────
-      var reveals  = document.querySelectorAll('.reveal');
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      reveals.forEach(function(r) { observer.observe(r); });
+    // ── SCROLL REVEAL ─────────────────────────────────────
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(function (r) { observer.observe(r); });
 
-      // ── CUSTOM CURSOR ─────────────────────────────────────
-      var dot   = document.getElementById('cursorDot');
-      var ring  = document.getElementById('cursorRing');
-      var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-      var lastTrailX = 0, lastTrailY = 0;
+    // ── CUSTOM CURSOR ─────────────────────────────────────
+    var dot = document.getElementById('cursorDot');
+    var ring = document.getElementById('cursorRing');
+    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    var lastTrailX = 0, lastTrailY = 0;
 
-      if (dot && ring) {
-        document.addEventListener('mousemove', function(e) {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          dot.style.left = mouseX + 'px';
-          dot.style.top  = mouseY + 'px';
-
-          var dist = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
-          if (dist > 38) {
-            lastTrailX = mouseX;
-            lastTrailY = mouseY;
-            var p = document.createElement('div');
-            p.className = 'cursor-trail-particle';
-            p.style.left = mouseX + 'px';
-            p.style.top  = mouseY + 'px';
-            document.body.appendChild(p);
-            setTimeout(function() { p.remove(); }, 550);
-          }
-        });
-
-        (function animateRing() {
-          ringX += (mouseX - ringX) * 0.12;
-          ringY += (mouseY - ringY) * 0.12;
-          ring.style.left = ringX + 'px';
-          ring.style.top  = ringY + 'px';
-          requestAnimationFrame(animateRing);
-        })();
-
-        document.documentElement.style.cursor = 'none';
-        document.querySelectorAll('a, button, input, textarea').forEach(function(el) {
-          el.style.cursor = 'none';
-        });
-
-        document.querySelectorAll('a, button').forEach(function(el) {
-          el.addEventListener('mouseenter', function() { ring.classList.add('expanded'); });
-          el.addEventListener('mouseleave', function() { ring.classList.remove('expanded'); });
-        });
-      }
-
-      // ── 3D CARD TILT ──────────────────────────────────────
-      document.querySelectorAll('.product-card').forEach(function(card) {
-        var shine = card.querySelector('.tilt-shine');
-        card.addEventListener('mousemove', function(e) {
-          var r  = card.getBoundingClientRect();
-          var dx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
-          var dy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
-          card.style.transform  = 'perspective(800px) rotateX(' + (dy * -10) + 'deg) rotateY(' + (dx * 10) + 'deg) scale3d(1.02,1.02,1.02)';
-          card.style.transition = 'transform 0.08s ease';
-          if (shine) {
-            var px = ((e.clientX - r.left) / r.width)  * 100;
-            var py = ((e.clientY - r.top)  / r.height) * 100;
-            shine.style.background = 'radial-gradient(circle at ' + px + '% ' + py + '%, rgba(201,168,76,0.15), transparent 65%)';
-            shine.style.opacity    = '1';
-          }
-        });
-        card.addEventListener('mouseleave', function() {
-          card.style.transform  = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
-          card.style.transition = 'transform 0.5s ease';
-          if (shine) shine.style.opacity = '0';
-        });
+    if (dot && ring) {
+      document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+        var dist = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
+        if (dist > 38) {
+          lastTrailX = mouseX;
+          lastTrailY = mouseY;
+          var p = document.createElement('div');
+          p.className = 'cursor-trail-particle';
+          p.style.left = mouseX + 'px';
+          p.style.top = mouseY + 'px';
+          document.body.appendChild(p);
+          setTimeout(function () { p.remove(); }, 550);
+        }
       });
 
-      // ── AI CHATBOT ────────────────────────────────────────
-      var botKnowledge = {
-        greetings: ['hello','hi','hey','good morning','good afternoon','hallo','goedemorgen','goedemiddag'],
-        products:  ['product','distribute','sell','offer','beverages','food','grocery','personal care','home','cleaning','drink','snack','dranken','voeding','verzorging'],
-        partner:   ['partner','brand','distributor','work together','collaborate','join','retailer','supplier','samenwerken','merk','leverancier'],
-        location:  ['location','address','where','find you','based','dordrecht','netherlands','locatie','adres','nederland'],
-        order:     ['order','purchase','buy','enquiry','enquire','how to','get started','contact','bestelling','kopen','aanvraag'],
-        contact:   ['email','phone','whatsapp','contact','reach','call','bellen','bereiken'],
+      (function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      })();
+
+      document.documentElement.style.cursor = 'none';
+      document.querySelectorAll('a, button, input, textarea').forEach(function (el) {
+        el.style.cursor = 'none';
+      });
+      document.querySelectorAll('a, button').forEach(function (el) {
+        el.addEventListener('mouseenter', function () { ring.classList.add('expanded'); });
+        el.addEventListener('mouseleave', function () { ring.classList.remove('expanded'); });
+      });
+    }
+
+    // ── 3D CARD TILT ──────────────────────────────────────
+    document.querySelectorAll('.product-card').forEach(function (card) {
+      var shine = card.querySelector('.tilt-shine');
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+        var dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+        card.style.transform = 'perspective(800px) rotateX(' + (dy * -10) + 'deg) rotateY(' + (dx * 10) + 'deg) scale3d(1.02,1.02,1.02)';
+        card.style.transition = 'transform 0.08s ease';
+        if (shine) {
+          var px = ((e.clientX - r.left) / r.width) * 100;
+          var py = ((e.clientY - r.top) / r.height) * 100;
+          shine.style.background = 'radial-gradient(circle at ' + px + '% ' + py + '%, rgba(201,168,76,0.15), transparent 65%)';
+          shine.style.opacity = '1';
+        }
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+        card.style.transition = 'transform 0.5s ease';
+        if (shine) shine.style.opacity = '0';
+      });
+    });
+
+    // ── AI CHATBOT ────────────────────────────────────────
+    var botKnowledge = {
+      greetings: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hallo', 'goedemorgen', 'goedemiddag'],
+      products: ['product', 'distribute', 'sell', 'offer', 'beverages', 'food', 'grocery', 'personal care', 'home', 'cleaning', 'drink', 'snack', 'dranken', 'voeding', 'verzorging'],
+      partner: ['partner', 'brand', 'distributor', 'work together', 'collaborate', 'join', 'retailer', 'supplier', 'samenwerken', 'merk', 'leverancier'],
+      location: ['location', 'address', 'where', 'find you', 'based', 'dordrecht', 'netherlands', 'locatie', 'adres', 'nederland'],
+      order: ['order', 'purchase', 'buy', 'enquiry', 'enquire', 'how to', 'get started', 'contact', 'bestelling', 'kopen', 'aanvraag'],
+      contact: ['email', 'phone', 'whatsapp', 'contact', 'reach', 'call', 'bellen', 'bereiken'],
+    };
+
+    var botResponses = {
+      greetings: "Hello! Welcome to Excorp Distribution. We're a premium FMCG distributor based in Dordrecht, Netherlands.\n\nHow can I help you today?",
+      products: "We distribute 4 premium product categories:\n\n• Beverages — soft drinks, juices, energy drinks\n• Food & Grocery — pantry staples, snacks, dairy\n• Personal Care — skincare, haircare, hygiene\n• Home & Cleaning — detergents, household essentials\n\nAll sourced from globally trusted FMCG brands. Which category interests you most?",
+      partner: "We'd love to work with you! Whether you're a brand looking for distribution or a retailer seeking premium FMCG products, Excorp is your partner of choice.\n\nYou can reach us at:\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form on this page.",
+      location: "We're based in Dordrecht, Netherlands:\n\n📍 Laan van Europa 370\n3317 DB Dordrecht\nThe Netherlands\n\nWe serve clients across the Netherlands and internationally.",
+      order: "Getting started is easy! You can:\n\n1. Fill in the contact form on this page\n2. Email us at farhan@excorpdistribution.nl\n3. WhatsApp us at +31 6 15272396\n\nOur team will get back to you within 24 hours.",
+      contact: "You can reach us through:\n\n📧 Email: farhan@excorpdistribution.nl\n📞 Phone: +31 6 81549755\n💬 WhatsApp: +31 6 15272396\n🔗 LinkedIn: Farhan Din\n\nWe're happy to help!",
+      default: "Thanks for your message! For detailed enquiries, please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396\n\nOr scroll up to fill in our contact form and we'll get back to you within 24 hours.",
+    };
+
+    var chatMessages = document.getElementById('chatMessages');
+    var chatSugg = document.getElementById('chatSuggestions');
+    var chatInput = document.getElementById('chatInput');
+    var chatOpen = false;
+
+    function toggleChat() {
+      var win = document.getElementById('chatWindow');
+      chatOpen = !chatOpen;
+      win.style.display = chatOpen ? 'flex' : 'none';
+      if (chatOpen && chatMessages && chatMessages.children.length === 0) {
+        addBotMsg("Hi! I'm the Excorp Assistant. How can I help you today?");
+      }
+    }
+
+    function addBotMsg(text) {
+      if (!chatMessages) return;
+      var d = document.createElement('div');
+      d.className = 'chat-message bot';
+      d.textContent = text;
+      chatMessages.appendChild(d);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addUserMsg(text) {
+      if (!chatMessages) return;
+      var d = document.createElement('div');
+      d.className = 'chat-message user';
+      d.textContent = text;
+      chatMessages.appendChild(d);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getResponse(text) {
+      var lower = text.toLowerCase();
+      for (var key in botKnowledge) {
+        if (botKnowledge[key].some(function (w) { return lower.includes(w); })) {
+          return botResponses[key] || botResponses.default;
+        }
+      }
+      return botResponses.default;
+    }
+
+    function askQuestion(q) {
+      if (chatSugg) chatSugg.style.display = 'none';
+      addUserMsg(q);
+      setTimeout(function () { addBotMsg(getResponse(q)); }, 400);
+    }
+
+    function sendChat() {
+      if (!chatInput || !chatInput.value.trim()) return;
+      var msg = chatInput.value.trim();
+      chatInput.value = '';
+      if (chatSugg) chatSugg.style.display = 'none';
+      addUserMsg(msg);
+      setTimeout(function () { addBotMsg(getResponse(msg)); }, 400);
+    }
+
+    // ── LANGUAGE TOGGLE ───────────────────────────────────
+    function setLang(lang) {
+      var toggle = document.getElementById('langToggle');
+      if (toggle) toggle.classList.toggle('nl', lang === 'nl');
+      var btnEn = document.getElementById('btn-en');
+      var btnNl = document.getElementById('btn-nl');
+      if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+      if (btnNl) btnNl.classList.toggle('active', lang === 'nl');
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        var val = el.getAttribute('data-' + lang);
+        if (!val) return;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+        else el.innerHTML = val;
+      });
+      document.querySelectorAll('[data-placeholder-en]').forEach(function (el) {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
+      });
+      var labels = {
+        en: ['Our products', 'Become a partner', 'Location', 'Place an order'],
+        nl: ['Onze producten', 'Word partner', 'Locatie', 'Bestelling plaatsen']
       };
+      document.querySelectorAll('.suggestion-btn').forEach(function (btn, i) {
+        if (labels[lang] && labels[lang][i]) btn.textContent = labels[lang][i];
+      });
+    }
 
-      var botResponses = {
-        greetings: "Hello! Welcome to Excorp Distribution. We're a premium FMCG distributor based in Dordrecht, Netherlands.\n\nHow can I help you today?",
-        products:  "We distribute 4 premium product categories:\n\n• Beverages — soft drinks, juices, energy drinks\n• Food & Grocery — pantry staples, snacks, dairy\n• Personal Care — skincare, haircare, hygiene\n• Home & Cleaning — detergents, household essentials\n\nAll sourced from globally trusted FMCG brands. Which category interests you most?",
-        partner:   "We'd love to work with you! Whether you're a brand looking for distribution or a retailer seeking premium FMCG products, Excorp is your partner of choice.\n\nYou can reach us at:\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form on this page.",
-        location:  "We're based in Dordrecht, Netherlands:\n\n📍 Laan van Europa 370\n3317 DB Dordrecht\nThe Netherlands\n\nWe serve clients across the Netherlands and internationally.",
-        order:     "Getting started is easy! You can:\n\n1. Fill in the contact form on this page\n2. Email us at farhan@excorpdistribution.nl\n3. WhatsApp us at +31 6 15272396\n\nOur team will get back to you within 24 hours.",
-        contact:   "You can reach us through:\n\n📧 Email: farhan@excorpdistribution.nl\n📞 Phone: +31 6 81549755\n💬 WhatsApp: +31 6 15272396\n🔗 LinkedIn: Farhan Din\n\nWe're happy to help!",
-        default:   "Thanks for your message! For detailed enquiries, please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396\n\nOr scroll up to fill in our contact form and we'll get back to you within 24 hours.",
-      };
+    // ── EXPOSE GLOBALS ────────────────────────────────────
+    window.toggleMenu = toggleMenu;
+    window.closeMenu = closeMenu;
+    window.sendEnquiry = sendEnquiry;
+    window.toggleChat = toggleChat;
+    window.askQuestion = askQuestion;
+    window.sendChat = sendChat;
+    window.setLang = setLang;
 
-      var chatMessages = document.getElementById('chatMessages');
-      var chatSugg    = document.getElementById('chatSuggestions');
-      var chatInput   = document.getElementById('chatInput');
-      var chatOpen    = false;
-      var firstMsg    = true;
+  });
+})();
 
-      function toggleChat() {
-        var win = document.getElementById('chatWindow');
-        chatOpen = !chatOpen;
-        win.style.display = chatOpen ? 'flex' : 'none';
-        if (chatOpen && chatMessages && chatMessages.children.length === 0) {
-          addBotMsg("Hi! I'm the Excorp Assistant. How can I help you today?");
-        }
-      }
-
-      function addBotMsg(text) {
-        if (!chatMessages) return;
-        var d = document.createElement('div');
-        d.className = 'chat-message bot';
-        d.textContent = text;
-        chatMessages.appendChild(d);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-
-      function addUserMsg(text) {
-        if (!chatMessages) return;
-        var d = document.createElement('div');
-        d.className = 'chat-message user';
-        d.textContent = text;
-        chatMessages.appendChild(d);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-
-      function getResponse(text) {
-        var lower = text.toLowerCase();
-        for (var key in botKnowledge) {
-          if (botKnowledge[key].some(function(w) { return lower.includes(w); })) {
-            return botResponses[key] || botResponses.default;
-          }
-        }
-        return botResponses.default;
-      }
-
-      function askQuestion(q) {
-        if (chatSugg) chatSugg.style.display = 'none';
-        addUserMsg(q);
-        setTimeout(function() { addBotMsg(getResponse(q)); }, 400);
-      }
-
-      function sendChat() {
-        if (!chatInput || !chatInput.value.trim()) return;
-        var msg = chatInput.value.trim();
-        chatInput.value = '';
-        if (chatSugg) chatSugg.style.display = 'none';
-        addUserMsg(msg);
-        setTimeout(function() { addBotMsg(getResponse(msg)); }, 400);
-      }
-
-      // ── LANGUAGE TOGGLE ───────────────────────────────────
-      function setLang(lang) {
-        var toggle = document.getElementById('langToggle');
-        if (toggle) {
-          toggle.classList.toggle('nl', lang === 'nl');
-        }
-        var btnEn = document.getElementById('btn-en');
-        var btnNl = document.getElementById('btn-nl');
-        if (btnEn) btnEn.classList.toggle('active', lang === 'en');
-        if (btnNl) btnNl.classList.toggle('active', lang === 'nl');
-
-        document.querySelectorAll('[data-en]').forEach(function(el) {
-          var val = el.getAttribute('data-' + lang);
-          if (!val) return;
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
-          else el.innerHTML = val;
-        });
-        document.querySelectorAll('[data-placeholder-en]').forEach(function(el) {
-          el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
-        });
-
-        var labels = {
-          en: ['Our products','Become a partner','Location','Place an order'],
-          nl: ['Onze producten','Word partner','Locatie','Bestelling plaatsen']
-        };
-        document.querySelectorAll('.suggestion-btn').forEach(function(btn, i) {
-          if (labels[lang] && labels[lang][i]) btn.textContent = labels[lang][i];
-        });
-      }
-
-      // ── EXPOSE GLOBALS ────────────────────────────────────
-      window.toggleMenu  = toggleMenu;
-      window.closeMenu   = closeMenu;
-      window.sendEnquiry = sendEnquiry;
-      window.toggleChat  = toggleChat;
-      window.askQuestion = askQuestion;
-      window.sendChat    = sendChat;
-      window.setLang     = setLang;
-
-    }); // end DOMContentLoaded
-  })();
   </script>
 </body>
 </html>
