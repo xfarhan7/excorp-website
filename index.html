@@ -301,15 +301,142 @@
     /* ─── HERO ─── */
     #home {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
       padding: 8rem 4rem 4rem;
       position: relative;
+      gap: 4rem;
       background:
         radial-gradient(ellipse 60% 70% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
         linear-gradient(135deg, #0a0a0a 0%, #111108 100%);
+    }
+    .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 480px;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+
+    /* ── BRAND CAROUSEL ── */
+    .brand-carousel {
+      position: relative;
+      width: 260px;
+      height: 420px;
+      perspective: 900px;
+    }
+    .brand-card {
+      position: absolute;
+      left: 50%;
+      width: 200px;
+      height: 110px;
+      margin-left: -100px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      cursor: default;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      /* start greyscale */
+      filter: grayscale(1) brightness(0.45);
+    }
+    .brand-card::before {
+      /* laser beam sweep */
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      transform: skewX(-15deg);
+      transition: none;
+      pointer-events: none;
+    }
+    .brand-card.lit {
+      filter: grayscale(0) brightness(1);
+      box-shadow: 0 12px 40px rgba(201,168,76,0.35), 0 0 0 1px rgba(201,168,76,0.25);
+    }
+    .brand-card.lit::before {
+      animation: laserSweep 0.55s ease forwards;
+    }
+    @keyframes laserSweep {
+      0%   { left: -100%; opacity: 1; }
+      100% { left: 160%;  opacity: 0; }
+    }
+
+    /* card colours */
+    .bc-nespresso    { background: linear-gradient(135deg, #1a0a0a, #3d0b0b); color: #c8a96e; }
+    .bc-dolce        { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); color: #e8e8e8; }
+    .bc-starbucks    { background: linear-gradient(135deg, #0a2010, #1a4020); color: #00a862; }
+    .bc-davidoff     { background: linear-gradient(135deg, #0a0f1a, #0f1f35); color: #8ab4d4; }
+    .bc-lavazza      { background: linear-gradient(135deg, #1a0800, #3a1500); color: #e8863a; }
+    .bc-illy         { background: linear-gradient(135deg, #0a0a14, #14142a); color: #c0c8e8; }
+
+
+    .brand-card-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      z-index: 1; pointer-events: none;
+    }
+    .brand-card-name  { font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; }
+    .brand-card-sub   { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.65; }
+
+    /* laser beam line behind cards */
+    .laser-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      margin-left: -1px;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(201,168,76,0.0) 10%,
+        rgba(201,168,76,0.9) 48%,
+        rgba(255,255,180,1)  50%,
+        rgba(201,168,76,0.9) 52%,
+        rgba(201,168,76,0.0) 90%,
+        transparent 100%
+      );
+      filter: blur(1.5px);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .laser-glow {
+      position: absolute;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      margin-left: -40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,160,0.55) 0%, rgba(201,168,76,0.2) 40%, transparent 70%);
+      filter: blur(6px);
+      pointer-events: none;
+      z-index: 11;
+      transition: top 0.5s ease;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 40px;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-family: 'Montserrat', sans-serif;
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: #2ecc71; border-radius: 50%; animation: waPulse 2s ease-in-out infinite; }
+
+    @media (max-width: 900px) {
+      #home { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
     }
     .hero-tag {
       font-size: 0.65rem;
@@ -1128,12 +1255,40 @@
 
   <!-- HERO -->
   <section id="home">
-    <p class="hero-tag" data-en="Premium FMCG Distribution" data-nl="Premium FMCG Distributie">Premium FMCG Distribution</p>
-    <h1 class="hero-title"><span data-en="Delivering <em>Excellence</em><br>Across Every Shelf" data-nl="Kwaliteit <em>Leveren</em><br>Op Elk Schap">Delivering <em>Excellence</em><br>Across Every Shelf</span></h1>
-    <p class="hero-subtitle" data-en="Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust." data-nl="Excorp Distribution verbindt wereldklasse consumentengoederen merken met markten die kwaliteit eisen. Wij leveren met precisie, integriteit en een erfenis van vertrouwen.">Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.</p>
-    <div class="hero-cta">
-      <a href="#products" class="btn-primary" data-en="Our Products" data-nl="Onze Producten">Our Products</a>
-      <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
+    <div class="hero-left">
+      <p class="hero-tag" data-en="Premium FMCG Distribution" data-nl="Premium FMCG Distributie">Premium FMCG Distribution</p>
+      <h1 class="hero-title"><span data-en="Delivering <em>Excellence</em><br>Across Every Shelf" data-nl="Kwaliteit <em>Leveren</em><br>Op Elk Schap">Delivering <em>Excellence</em><br>Across Every Shelf</span></h1>
+      <p class="hero-subtitle" data-en="Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust." data-nl="Excorp Distribution verbindt wereldklasse consumentengoederen merken met markten die kwaliteit eisen. Wij leveren met precisie, integriteit en een erfenis van vertrouwen.">Excorp Distribution bridges world-class consumer goods brands with markets that demand quality. We deliver with precision, integrity, and a legacy of trust.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn-primary" data-en="Our Products" data-nl="Onze Producten">Our Products</a>
+        <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="brand-carousel" id="brandCarousel">
+        <div class="laser-line"></div>
+        <div class="laser-glow" id="laserGlow"></div>
+        <div class="brand-card bc-nespresso" data-index="0">
+          <div class="brand-card-inner"><div class="brand-card-name">NESPRESSO</div></div>
+        </div>
+        <div class="brand-card bc-dolce" data-index="1">
+          <div class="brand-card-inner"><div class="brand-card-name">Dolce Gusto</div></div>
+        </div>
+        <div class="brand-card bc-starbucks" data-index="2">
+          <div class="brand-card-inner"><div class="brand-card-name">STARBUCKS</div></div>
+        </div>
+        <div class="brand-card bc-davidoff" data-index="3">
+          <div class="brand-card-inner"><div class="brand-card-name">Davidoff</div></div>
+        </div>
+        <div class="brand-card bc-lavazza" data-index="4">
+          <div class="brand-card-inner"><div class="brand-card-name">LAVAZZA</div></div>
+        </div>
+        <div class="brand-card bc-illy" data-index="5">
+          <div class="brand-card-inner"><div class="brand-card-name">illy</div></div>
+        </div>
+        </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1632,6 +1787,57 @@
           if (labels[lang] && labels[lang][i]) btn.textContent = labels[lang][i];
         });
       }
+
+
+      // ── BRAND CAROUSEL ────────────────────────────────────
+      (function() {
+        var carousel = document.getElementById('brandCarousel');
+        if (!carousel) return;
+        var cards = Array.from(carousel.querySelectorAll('.brand-card'));
+        var glow  = document.getElementById('laserGlow');
+        var total = cards.length;
+        var cardH = 88;
+        var gap   = 10;
+        var viewH = 420;
+        var totalH = total * cardH + (total - 1) * gap;
+        var startY = (viewH - totalH) / 2;
+
+        // Static fan positioning
+        cards.forEach(function(card, i) {
+          var y      = startY + i * (cardH + gap);
+          var centre = (total - 1) / 2;
+          var dist   = i - centre;
+          var rotX   = dist * -5;
+          var scale  = 1 - Math.abs(dist) * 0.03;
+          var op     = 1 - Math.abs(dist) * 0.08;
+          card.style.top       = y + 'px';
+          card.style.transform = 'rotateX(' + rotX + 'deg) scaleY(' + scale + ')';
+          card.style.opacity   = op;
+          card.style.zIndex    = total - Math.abs(Math.round(dist));
+        });
+
+        function getCardCentreY(i) {
+          return startY + i * (cardH + gap) + cardH / 2;
+        }
+
+        var current = 0;
+
+        function litCard(i) {
+          cards.forEach(function(c) { c.classList.remove('lit'); });
+          if (glow) glow.style.top = (getCardCentreY(i) - 40) + 'px';
+          setTimeout(function() {
+            if (cards[i]) cards[i].classList.add('lit');
+          }, 120);
+        }
+
+        if (glow) glow.style.top = (getCardCentreY(0) - 40) + 'px';
+        litCard(0);
+
+        setInterval(function() {
+          current = (current + 1) % total;
+          litCard(current);
+        }, 1400);
+      })();
 
       // ── EXPOSE GLOBALS ────────────────────────────────────
       window.toggleMenu  = toggleMenu;
