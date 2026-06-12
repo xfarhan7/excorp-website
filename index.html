@@ -3,7 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Excorp Distribution</title>
+  <title>Excorp Distribution — Premium FMCG Distributor Netherlands</title>
+  <meta name="description" content="Excorp Distribution is a premium FMCG wholesale distributor based in Dordrecht, Netherlands. We supply beverages, food, personal care and home products to retailers and brands across Europe and the Middle East. COC: 96822945.">
+  <meta name="keywords" content="FMCG distributor Netherlands, wholesale distributor Dordrecht, premium consumer goods, beverage distributor Europe, food distributor Netherlands, Excorp Distribution">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Excorp Distribution B.V.">
+  <link rel="canonical" href="https://xfarhan7.github.io/excorp-website/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Excorp Distribution — Premium FMCG Distributor Netherlands">
+  <meta property="og:description" content="Premium FMCG wholesale distributor based in Dordrecht, Netherlands. Supplying beverages, food, personal care and home products across Europe and the Middle East.">
+  <meta property="og:url" content="https://xfarhan7.github.io/excorp-website/">
+  <meta property="og:image" content="https://xfarhan7.github.io/excorp-website/favicon-192.png">
+  <meta property="og:site_name" content="Excorp Distribution">
+  <meta property="og:locale" content="en_NL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Excorp Distribution — Premium FMCG Distributor Netherlands">
+  <meta name="twitter:description" content="Premium FMCG wholesale distributor based in Dordrecht, Netherlands.">
+  <meta name="twitter:image" content="https://xfarhan7.github.io/excorp-website/favicon-192.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Excorp Distribution",
+    "alternateName": "Excorp Distribution B.V.",
+    "url": "https://xfarhan7.github.io/excorp-website/",
+    "logo": "https://xfarhan7.github.io/excorp-website/favicon-192.png",
+    "description": "Premium FMCG wholesale distributor based in Dordrecht, Netherlands. Specialising in beverages, food & grocery, personal care and home & cleaning products for retailers and brands across Europe and the Middle East.",
+    "foundingDate": "2023",
+    "identifier": "96822945",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Laan van Europa 370",
+      "postalCode": "3317 DB",
+      "addressLocality": "Dordrecht",
+      "addressCountry": "NL"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+31-6-81549755",
+        "contactType": "sales",
+        "availableLanguage": ["English", "Dutch"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+31-6-15272396",
+        "contactType": "customer service",
+        "contactOption": "WhatsApp"
+      }
+    ],
+    "email": "farhan@excorpdistribution.nl",
+    "sameAs": [
+      "https://www.linkedin.com/in/farhan-din-80425baa/"
+    ],
+    "areaServed": ["NL", "BE", "DE", "FR", "AE", "SA", "PK"],
+    "knowsAbout": ["FMCG distribution", "wholesale beverages", "food distribution", "personal care products", "home cleaning products"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Excorp FMCG Product Catalogue",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Beverages", "description": "Premium soft drinks, juices and energy drinks"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Food & Grocery", "description": "Pantry staples, snacks and dairy products"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Personal Care", "description": "Skincare, haircare and hygiene products"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Home & Cleaning", "description": "Detergents and household essentials"}}
+      ]
+    }
+  }
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -887,6 +959,133 @@
       width: 12px; height: 12px; background: #2ecc71;
       border-radius: 50%; border: 2px solid #0a0a0a;
     }
+
+    /* ─── ANIMATED STATS COUNTER ─── */
+    .stat-number[data-target] { transition: none; }
+
+    /* ─── BRAND MARQUEE ─── */
+    .brands-section {
+      background: var(--dark-2);
+      padding: 3rem 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .brands-label {
+      text-align: center;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 2rem;
+      margin: 0 0.5rem;
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 40px;
+      white-space: nowrap;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .brand-pill:hover { border-color: var(--gold); color: var(--gold); }
+    .brand-pill-dot {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    /* ─── FAQ SECTION ─── */
+    .faq-section {
+      padding: 7rem 4rem;
+      background: var(--dark);
+    }
+    .faq-grid {
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.4rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-off-white);
+      letter-spacing: 0.02em;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon {
+      font-size: 1.2rem;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+    }
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.4rem; }
+
+    /* ─── WHATSAPP STATUS ─── */
+    .wa-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.6rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.1em;
+      color: #2ecc71;
+      margin-top: 0.4rem;
+    }
+    .wa-status-dot {
+      width: 7px; height: 7px;
+      background: #2ecc71;
+      border-radius: 50%;
+      animation: waPulse 2s ease-in-out infinite;
+    }
+    @keyframes waPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
   </style>
 </head>
 <body>
@@ -941,16 +1140,46 @@
   <!-- STATS -->
   <div class="stats-bar">
     <div class="stat-item reveal">
-      <div class="stat-number">Premium</div>
-      <div class="stat-label" data-en="Quality" data-nl="Kwaliteit">Quality</div>
+      <div class="stat-number" data-target="4" data-suffix="+">0+</div>
+      <div class="stat-label" data-en="Product Categories" data-nl="Productcategorieën">Product Categories</div>
     </div>
     <div class="stat-item reveal" style="transition-delay:0.1s">
-      <div class="stat-number">Proven</div>
-      <div class="stat-label" data-en="Expertise" data-nl="Expertise">Expertise</div>
+      <div class="stat-number" data-target="7" data-suffix="">0</div>
+      <div class="stat-label" data-en="Countries Served" data-nl="Landen Bediend">Countries Served</div>
     </div>
     <div class="stat-item reveal" style="transition-delay:0.2s">
-      <div class="stat-number">Trusted</div>
-      <div class="stat-label" data-en="Brands" data-nl="Merken">Brands</div>
+      <div class="stat-number" data-target="2023" data-suffix="">0</div>
+      <div class="stat-label" data-en="Founded" data-nl="Opgericht">Founded</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.3s">
+      <div class="stat-number" data-target="100" data-suffix="%">0%</div>
+      <div class="stat-label" data-en="Quality Assured" data-nl="Kwaliteitsgeborgd">Quality Assured</div>
+    </div>
+  </div>
+
+  <!-- BRAND MARQUEE -->
+  <div class="brands-section">
+    <p class="brands-label" data-en="Trusted Product Categories We Supply" data-nl="Vertrouwde Categorieën Die Wij Leveren">Trusted Product Categories We Supply</p>
+    <div style="overflow:hidden;">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Beverages</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Food &amp; Grocery</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Personal Care</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Home &amp; Cleaning</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>FMCG Distribution</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Premium Brands</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>B2B Wholesale</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Worldwide Delivery</span>
+        <!-- duplicate for seamless loop -->
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Beverages</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Food &amp; Grocery</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Personal Care</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Home &amp; Cleaning</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>FMCG Distribution</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Premium Brands</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>B2B Wholesale</span>
+        <span class="brand-pill"><span class="brand-pill-dot"></span>Worldwide Delivery</span>
+      </div>
     </div>
   </div>
 
@@ -1088,6 +1317,45 @@
   </div>
 
   <!-- FOOTER -->
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section" id="faq">
+    <div style="text-align:center;" class="reveal">
+      <p style="font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;font-family:'Montserrat',sans-serif;">Common Questions</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--text-off-white);margin:1rem 0;">Frequently Asked <em style="color:var(--gold);font-style:italic;">Questions</em></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What types of FMCG products does Excorp distribute?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">We distribute across four core categories: Beverages (soft drinks, juices, energy drinks), Food &amp; Grocery (pantry staples, snacks, dairy), Personal Care (skincare, haircare, hygiene), and Home &amp; Cleaning (detergents, household essentials). All products are sourced from globally trusted FMCG brands.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Which markets and regions does Excorp serve?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Excorp Distribution is based in Dordrecht, Netherlands and serves clients worldwide. We work with retailers, brands and B2B partners across multiple continents, delivering premium FMCG products wherever quality is in demand.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I place a wholesale order or enquiry?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">You can reach us via the contact form on this page, by email at farhan@excorpdistribution.nl, or directly on WhatsApp at +31 6 15272396. We typically respond within 24 hours and are happy to discuss minimum order quantities, pricing and lead times.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do you work with both brands and retailers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">Yes — we work with both sides of the supply chain. Whether you are a brand looking for a reliable distribution partner in Europe, or a retailer seeking consistent supply of quality FMCG products, Excorp Distribution can support your needs.</div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-logo">EXCORP DISTRIBUTION</div>
     <ul class="footer-links">
@@ -1142,213 +1410,241 @@
   </div>
 
   <script data-cfasync="false">
-(function () {
-  document.addEventListener('DOMContentLoaded', function () {
+  (function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
-    // ── MENU ──────────────────────────────────────────────
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+      // ── MENU ──────────────────────────────────────────────
+      function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+      function closeMenu()  { document.getElementById('mobileMenu').classList.remove('open'); }
 
-    // ── CONTACT FORM ──────────────────────────────────────
-    function sendEnquiry() {
-      var name = document.getElementById('fname').value;
-      var company = document.getElementById('fcompany').value;
-      var email = document.getElementById('femail').value;
-      var message = document.getElementById('fmessage').value;
-      if (!name || !email) { alert('Please fill in your name and email.'); return; }
-      var subject = encodeURIComponent('Enquiry from ' + name);
-      var body = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
-      window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
-    }
-
-    // ── SCROLL REVEAL ─────────────────────────────────────
-    var reveals = document.querySelectorAll('.reveal');
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    reveals.forEach(function (r) { observer.observe(r); });
-
-    // ── CUSTOM CURSOR ─────────────────────────────────────
-    var dot = document.getElementById('cursorDot');
-    var ring = document.getElementById('cursorRing');
-    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-    var lastTrailX = 0, lastTrailY = 0;
-
-    if (dot && ring) {
-      document.addEventListener('mousemove', function (e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
-        var dist = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
-        if (dist > 38) {
-          lastTrailX = mouseX;
-          lastTrailY = mouseY;
-          var p = document.createElement('div');
-          p.className = 'cursor-trail-particle';
-          p.style.left = mouseX + 'px';
-          p.style.top = mouseY + 'px';
-          document.body.appendChild(p);
-          setTimeout(function () { p.remove(); }, 550);
-        }
-      });
-
-      (function animateRing() {
-        ringX += (mouseX - ringX) * 0.12;
-        ringY += (mouseY - ringY) * 0.12;
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        requestAnimationFrame(animateRing);
-      })();
-
-      document.documentElement.style.cursor = 'none';
-      document.querySelectorAll('a, button, input, textarea').forEach(function (el) {
-        el.style.cursor = 'none';
-      });
-      document.querySelectorAll('a, button').forEach(function (el) {
-        el.addEventListener('mouseenter', function () { ring.classList.add('expanded'); });
-        el.addEventListener('mouseleave', function () { ring.classList.remove('expanded'); });
-      });
-    }
-
-    // ── 3D CARD TILT ──────────────────────────────────────
-    document.querySelectorAll('.product-card').forEach(function (card) {
-      var shine = card.querySelector('.tilt-shine');
-      card.addEventListener('mousemove', function (e) {
-        var r = card.getBoundingClientRect();
-        var dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
-        var dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
-        card.style.transform = 'perspective(800px) rotateX(' + (dy * -10) + 'deg) rotateY(' + (dx * 10) + 'deg) scale3d(1.02,1.02,1.02)';
-        card.style.transition = 'transform 0.08s ease';
-        if (shine) {
-          var px = ((e.clientX - r.left) / r.width) * 100;
-          var py = ((e.clientY - r.top) / r.height) * 100;
-          shine.style.background = 'radial-gradient(circle at ' + px + '% ' + py + '%, rgba(201,168,76,0.15), transparent 65%)';
-          shine.style.opacity = '1';
-        }
-      });
-      card.addEventListener('mouseleave', function () {
-        card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
-        card.style.transition = 'transform 0.5s ease';
-        if (shine) shine.style.opacity = '0';
-      });
-    });
-
-    // ── AI CHATBOT ────────────────────────────────────────
-    var botKnowledge = {
-      greetings: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hallo', 'goedemorgen', 'goedemiddag'],
-      products: ['product', 'distribute', 'sell', 'offer', 'beverages', 'food', 'grocery', 'personal care', 'home', 'cleaning', 'drink', 'snack', 'dranken', 'voeding', 'verzorging'],
-      partner: ['partner', 'brand', 'distributor', 'work together', 'collaborate', 'join', 'retailer', 'supplier', 'samenwerken', 'merk', 'leverancier'],
-      location: ['location', 'address', 'where', 'find you', 'based', 'dordrecht', 'netherlands', 'locatie', 'adres', 'nederland'],
-      order: ['order', 'purchase', 'buy', 'enquiry', 'enquire', 'how to', 'get started', 'contact', 'bestelling', 'kopen', 'aanvraag'],
-      contact: ['email', 'phone', 'whatsapp', 'contact', 'reach', 'call', 'bellen', 'bereiken'],
-    };
-
-    var botResponses = {
-      greetings: "Hello! Welcome to Excorp Distribution. We're a premium FMCG distributor based in Dordrecht, Netherlands.\n\nHow can I help you today?",
-      products: "We distribute 4 premium product categories:\n\n• Beverages — soft drinks, juices, energy drinks\n• Food & Grocery — pantry staples, snacks, dairy\n• Personal Care — skincare, haircare, hygiene\n• Home & Cleaning — detergents, household essentials\n\nAll sourced from globally trusted FMCG brands. Which category interests you most?",
-      partner: "We'd love to work with you! Whether you're a brand looking for distribution or a retailer seeking premium FMCG products, Excorp is your partner of choice.\n\nYou can reach us at:\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396\n\nOr fill in our contact form on this page.",
-      location: "We're based in Dordrecht, Netherlands:\n\n📍 Laan van Europa 370\n3317 DB Dordrecht\nThe Netherlands\n\nWe serve clients across the Netherlands and internationally.",
-      order: "Getting started is easy! You can:\n\n1. Fill in the contact form on this page\n2. Email us at farhan@excorpdistribution.nl\n3. WhatsApp us at +31 6 15272396\n\nOur team will get back to you within 24 hours.",
-      contact: "You can reach us through:\n\n📧 Email: farhan@excorpdistribution.nl\n📞 Phone: +31 6 81549755\n💬 WhatsApp: +31 6 15272396\n🔗 LinkedIn: Farhan Din\n\nWe're happy to help!",
-      default: "Thanks for your message! For detailed enquiries, please reach out directly:\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396\n\nOr scroll up to fill in our contact form and we'll get back to you within 24 hours.",
-    };
-
-    var chatMessages = document.getElementById('chatMessages');
-    var chatSugg = document.getElementById('chatSuggestions');
-    var chatInput = document.getElementById('chatInput');
-    var chatOpen = false;
-
-    function toggleChat() {
-      var win = document.getElementById('chatWindow');
-      chatOpen = !chatOpen;
-      win.style.display = chatOpen ? 'flex' : 'none';
-      if (chatOpen && chatMessages && chatMessages.children.length === 0) {
-        addBotMsg("Hi! I'm the Excorp Assistant. How can I help you today?");
+      // ── CONTACT FORM ──────────────────────────────────────
+      function sendEnquiry() {
+        var name    = document.getElementById('fname').value;
+        var company = document.getElementById('fcompany').value;
+        var email   = document.getElementById('femail').value;
+        var message = document.getElementById('fmessage').value;
+        if (!name || !email) { alert('Please fill in your name and email.'); return; }
+        var subject = encodeURIComponent('Enquiry from ' + name);
+        var body    = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+        window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
       }
-    }
 
-    function addBotMsg(text) {
-      if (!chatMessages) return;
-      var d = document.createElement('div');
-      d.className = 'chat-message bot';
-      d.textContent = text;
-      chatMessages.appendChild(d);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+      // ── SCROLL REVEAL ─────────────────────────────────────
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
 
-    function addUserMsg(text) {
-      if (!chatMessages) return;
-      var d = document.createElement('div');
-      d.className = 'chat-message user';
-      d.textContent = text;
-      chatMessages.appendChild(d);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function getResponse(text) {
-      var lower = text.toLowerCase();
-      for (var key in botKnowledge) {
-        if (botKnowledge[key].some(function (w) { return lower.includes(w); })) {
-          return botResponses[key] || botResponses.default;
+      // ── ANIMATED COUNTERS ─────────────────────────────────
+      function animateCounter(el) {
+        var target   = parseInt(el.getAttribute('data-target'));
+        var suffix   = el.getAttribute('data-suffix') || '';
+        var start    = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / 1800, 1);
+          var ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(target * ease) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
         }
+        requestAnimationFrame(step);
       }
-      return botResponses.default;
-    }
-
-    function askQuestion(q) {
-      if (chatSugg) chatSugg.style.display = 'none';
-      addUserMsg(q);
-      setTimeout(function () { addBotMsg(getResponse(q)); }, 400);
-    }
-
-    function sendChat() {
-      if (!chatInput || !chatInput.value.trim()) return;
-      var msg = chatInput.value.trim();
-      chatInput.value = '';
-      if (chatSugg) chatSugg.style.display = 'none';
-      addUserMsg(msg);
-      setTimeout(function () { addBotMsg(getResponse(msg)); }, 400);
-    }
-
-    // ── LANGUAGE TOGGLE ───────────────────────────────────
-    function setLang(lang) {
-      var toggle = document.getElementById('langToggle');
-      if (toggle) toggle.classList.toggle('nl', lang === 'nl');
-      var btnEn = document.getElementById('btn-en');
-      var btnNl = document.getElementById('btn-nl');
-      if (btnEn) btnEn.classList.toggle('active', lang === 'en');
-      if (btnNl) btnNl.classList.toggle('active', lang === 'nl');
-      document.querySelectorAll('[data-en]').forEach(function (el) {
-        var val = el.getAttribute('data-' + lang);
-        if (!val) return;
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
-        else el.innerHTML = val;
+      var cntObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting && !e.target.dataset.counted) {
+            e.target.dataset.counted = '1';
+            animateCounter(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
+        cntObserver.observe(el);
       });
-      document.querySelectorAll('[data-placeholder-en]').forEach(function (el) {
-        el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
+
+      // ── CUSTOM CURSOR ─────────────────────────────────────
+      var dot   = document.getElementById('cursorDot');
+      var ring  = document.getElementById('cursorRing');
+      var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+      var lastTrailX = 0, lastTrailY = 0;
+
+      if (dot && ring) {
+        document.addEventListener('mousemove', function(e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          dot.style.left = mouseX + 'px';
+          dot.style.top  = mouseY + 'px';
+          var dist = Math.hypot(mouseX - lastTrailX, mouseY - lastTrailY);
+          if (dist > 38) {
+            lastTrailX = mouseX;
+            lastTrailY = mouseY;
+            var p = document.createElement('div');
+            p.className = 'cursor-trail-particle';
+            p.style.left = mouseX + 'px';
+            p.style.top  = mouseY + 'px';
+            document.body.appendChild(p);
+            setTimeout(function() { if (p.parentNode) p.parentNode.removeChild(p); }, 550);
+          }
+        });
+
+        (function animateRing() {
+          ringX += (mouseX - ringX) * 0.12;
+          ringY += (mouseY - ringY) * 0.12;
+          ring.style.left = ringX + 'px';
+          ring.style.top  = ringY + 'px';
+          requestAnimationFrame(animateRing);
+        })();
+
+        document.documentElement.style.cursor = 'none';
+        document.querySelectorAll('a, button, input, textarea').forEach(function(el) {
+          el.style.cursor = 'none';
+        });
+        document.querySelectorAll('a, button').forEach(function(el) {
+          el.addEventListener('mouseenter', function() { ring.classList.add('expanded'); });
+          el.addEventListener('mouseleave', function() { ring.classList.remove('expanded'); });
+        });
+      }
+
+      // ── 3D CARD TILT ──────────────────────────────────────
+      document.querySelectorAll('.product-card').forEach(function(card) {
+        var shine = card.querySelector('.tilt-shine');
+        card.addEventListener('mousemove', function(e) {
+          var r  = card.getBoundingClientRect();
+          var dx = (e.clientX - r.left  - r.width  / 2) / (r.width  / 2);
+          var dy = (e.clientY - r.top   - r.height / 2) / (r.height / 2);
+          card.style.transform  = 'perspective(800px) rotateX(' + (dy * -10) + 'deg) rotateY(' + (dx * 10) + 'deg) scale3d(1.02,1.02,1.02)';
+          card.style.transition = 'transform 0.08s ease';
+          if (shine) {
+            var px = ((e.clientX - r.left) / r.width)  * 100;
+            var py = ((e.clientY - r.top)  / r.height) * 100;
+            shine.style.background = 'radial-gradient(circle at ' + px + '% ' + py + '%, rgba(201,168,76,0.15), transparent 65%)';
+            shine.style.opacity = '1';
+          }
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.transform  = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+          card.style.transition = 'transform 0.5s ease';
+          if (shine) shine.style.opacity = '0';
+        });
       });
-      var labels = {
-        en: ['Our products', 'Become a partner', 'Location', 'Place an order'],
-        nl: ['Onze producten', 'Word partner', 'Locatie', 'Bestelling plaatsen']
+
+      // ── FAQ TOGGLE ────────────────────────────────────────
+      function toggleFaq(btn) {
+        var item   = btn.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      }
+
+      // ── AI CHATBOT ────────────────────────────────────────
+      var botKnowledge = {
+        greetings: ['hello','hi','hey','good morning','good afternoon','hallo','goedemorgen','goedemiddag'],
+        products:  ['product','distribute','sell','offer','beverages','food','grocery','personal care','home','cleaning','drink','snack','dranken','voeding','verzorging'],
+        partner:   ['partner','brand','distributor','work together','collaborate','join','retailer','supplier','samenwerken','merk','leverancier'],
+        location:  ['location','address','where','find you','based','dordrecht','netherlands','locatie','adres','nederland'],
+        order:     ['order','purchase','buy','enquiry','enquire','how to','get started','contact','bestelling','kopen','aanvraag'],
+        contact:   ['email','phone','whatsapp','contact','reach','call','bellen','bereiken'],
       };
-      document.querySelectorAll('.suggestion-btn').forEach(function (btn, i) {
-        if (labels[lang] && labels[lang][i]) btn.textContent = labels[lang][i];
-      });
-    }
+      var botResponses = {
+        greetings: "Hello! Welcome to Excorp Distribution. We're a premium FMCG distributor based in Dordrecht, Netherlands.\n\nHow can I help you today?",
+        products:  "We distribute 4 premium product categories:\n\n• Beverages\n• Food & Grocery\n• Personal Care\n• Home & Cleaning\n\nWhich category interests you most?",
+        partner:   "We'd love to work with you!\n\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396",
+        location:  "We're based in Dordrecht, Netherlands:\n\n📍 Laan van Europa 370\n3317 DB Dordrecht",
+        order:     "Getting started is easy:\n\n1. Fill in our contact form\n2. Email farhan@excorpdistribution.nl\n3. WhatsApp +31 6 15272396\n\nWe reply within 24 hours.",
+        contact:   "📧 farhan@excorpdistribution.nl\n📞 +31 6 81549755\n💬 WhatsApp: +31 6 15272396",
+        default:   "Thanks for your message!\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
+      };
 
-    // ── EXPOSE GLOBALS ────────────────────────────────────
-    window.toggleMenu = toggleMenu;
-    window.closeMenu = closeMenu;
-    window.sendEnquiry = sendEnquiry;
-    window.toggleChat = toggleChat;
-    window.askQuestion = askQuestion;
-    window.sendChat = sendChat;
-    window.setLang = setLang;
+      var chatMessages = document.getElementById('chatMessages');
+      var chatSugg    = document.getElementById('chatSuggestions');
+      var chatInput   = document.getElementById('chatInput');
+      var chatOpen    = false;
 
-  });
-})();
+      function toggleChat() {
+        var win = document.getElementById('chatWindow');
+        chatOpen = !chatOpen;
+        win.style.display = chatOpen ? 'flex' : 'none';
+        if (chatOpen && chatMessages && chatMessages.children.length === 0) {
+          addBotMsg("Hi! I'm the Excorp Assistant. How can I help you today?");
+        }
+      }
+      function addBotMsg(text) {
+        if (!chatMessages) return;
+        var d = document.createElement('div');
+        d.className = 'chat-message bot';
+        d.textContent = text;
+        chatMessages.appendChild(d);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function addUserMsg(text) {
+        if (!chatMessages) return;
+        var d = document.createElement('div');
+        d.className = 'chat-message user';
+        d.textContent = text;
+        chatMessages.appendChild(d);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+      function getResponse(text) {
+        var lower = text.toLowerCase();
+        for (var key in botKnowledge) {
+          if (botKnowledge[key].some(function(w) { return lower.indexOf(w) !== -1; })) {
+            return botResponses[key] || botResponses.default;
+          }
+        }
+        return botResponses.default;
+      }
+      function askQuestion(q) {
+        if (chatSugg) chatSugg.style.display = 'none';
+        addUserMsg(q);
+        setTimeout(function() { addBotMsg(getResponse(q)); }, 400);
+      }
+      function sendChat() {
+        if (!chatInput || !chatInput.value.trim()) return;
+        var msg = chatInput.value.trim();
+        chatInput.value = '';
+        if (chatSugg) chatSugg.style.display = 'none';
+        addUserMsg(msg);
+        setTimeout(function() { addBotMsg(getResponse(msg)); }, 400);
+      }
 
+      // ── LANGUAGE TOGGLE ───────────────────────────────────
+      function setLang(lang) {
+        var toggle = document.getElementById('langToggle');
+        if (toggle) toggle.classList.toggle('nl', lang === 'nl');
+        var btnEn = document.getElementById('btn-en');
+        var btnNl = document.getElementById('btn-nl');
+        if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+        if (btnNl) btnNl.classList.toggle('active', lang === 'nl');
+        document.querySelectorAll('[data-en]').forEach(function(el) {
+          var val = el.getAttribute('data-' + lang);
+          if (!val) return;
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+          else el.innerHTML = val;
+        });
+        document.querySelectorAll('[data-placeholder-en]').forEach(function(el) {
+          el.placeholder = el.getAttribute('data-placeholder-' + lang) || el.placeholder;
+        });
+        var labels = {
+          en: ['Our products','Become a partner','Location','Place an order'],
+          nl: ['Onze producten','Word partner','Locatie','Bestelling plaatsen']
+        };
+        document.querySelectorAll('.suggestion-btn').forEach(function(btn, i) {
+          if (labels[lang] && labels[lang][i]) btn.textContent = labels[lang][i];
+        });
+      }
+
+      // ── EXPOSE GLOBALS ────────────────────────────────────
+      window.toggleMenu  = toggleMenu;
+      window.closeMenu   = closeMenu;
+      window.sendEnquiry = sendEnquiry;
+      window.toggleChat  = toggleChat;
+      window.askQuestion = askQuestion;
+      window.sendChat    = sendChat;
+      window.setLang     = setLang;
+      window.toggleFaq   = toggleFaq;
+
+    }); // end DOMContentLoaded
+  })();
   </script>
 </body>
 </html>
