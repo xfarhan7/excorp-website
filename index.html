@@ -346,9 +346,20 @@
       cursor: default;
       box-shadow: 0 8px 32px rgba(0,0,0,0.6);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      /* start greyscale */
-      filter: grayscale(1) brightness(0.45);
+      filter: grayscale(1) brightness(0.15);
     }
+    /* dark overlay on top of every card — fades out when lit */
+    .brand-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      border-radius: 18px;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .brand-card.lit::after { opacity: 0; }
     .brand-card::before {
       /* laser beam sweep */
       content: '';
@@ -383,7 +394,7 @@
 
     .brand-card-inner {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
-      z-index: 1; pointer-events: none;
+      z-index: 3; pointer-events: none; position: relative;
     }
     .brand-card-name  { font-size: 1rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
     .brand-card-sub   { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.65; }
