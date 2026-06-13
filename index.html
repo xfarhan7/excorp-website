@@ -576,6 +576,14 @@
       object-fit: cover;
       display: block;
       filter: brightness(0.85) sepia(0.1);
+      animation: kenBurns 12s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+    @keyframes kenBurns {
+      0%   { transform: scale(1)    translateX(0)     translateY(0); }
+      33%  { transform: scale(1.06) translateX(-1%)   translateY(-1%); }
+      66%  { transform: scale(1.10) translateX(1%)    translateY(0.5%); }
+      100% { transform: scale(1.05) translateX(-0.5%) translateY(1%); }
     }
     .about-video-wrap {
       position: relative;
@@ -1354,7 +1362,7 @@
     <div class="about-image-block reveal">
       <div class="about-video-wrap">
         <img
-          src="https://esdst.eu/wp-content/uploads/2024/07/The-Future-of-Work-800x450.jpg"
+          src="excorp_about.png"
           alt="Robotics and automation in industry"
           onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
         />
