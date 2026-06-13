@@ -575,15 +575,33 @@
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.85) sepia(0.1);
-      animation: kenBurns 12s ease-in-out infinite alternate;
-      transform-origin: center center;
+      filter: brightness(0.9);
     }
-    @keyframes kenBurns {
-      0%   { transform: scale(1)    translateX(0)     translateY(0); }
-      33%  { transform: scale(1.06) translateX(-1%)   translateY(-1%); }
-      66%  { transform: scale(1.10) translateX(1%)    translateY(0.5%); }
-      100% { transform: scale(1.05) translateX(-0.5%) translateY(1%); }
+    /* light sweep shine across the image */
+    .about-image-block::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(201,168,76,0.0) 30%,
+        rgba(255,245,210,0.18) 50%,
+        rgba(201,168,76,0.0) 70%,
+        transparent 100%
+      );
+      transform: skewX(-18deg);
+      pointer-events: none;
+      z-index: 3;
+      animation: aboutSweep 6s ease-in-out infinite;
+    }
+    @keyframes aboutSweep {
+      0%   { left: -150%; }
+      45%  { left: 150%; }
+      100% { left: 150%; }
     }
     .about-video-wrap {
       position: relative;
