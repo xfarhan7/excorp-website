@@ -352,12 +352,12 @@
 
     /* ─── HERO ─── */
     #home {
-      min-height: 100vh;
+      min-height: 88vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding: 8rem 4rem 4rem;
+      padding: 8rem 4rem 3rem;
       position: relative;
       overflow: hidden;
       background:
@@ -652,6 +652,36 @@
       align-items: center;
     }
     .about-image-block { position: relative; overflow: hidden; border-radius: 4px; align-self: center; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 1px;
+      background: rgba(201,168,76,0.12);
+    }
+    .about-stat {
+      background: var(--dark-2);
+      padding: 1.6rem 1rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .about-stat:hover { background: var(--dark-3); }
+    .about-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: 0.03em;
+    }
+    .about-stat-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      font-family: 'Montserrat', sans-serif;
+    }
     .about-image-block img {
       width: 100%;
       height: auto;
@@ -659,7 +689,7 @@
       filter: brightness(0.95);
     }
     /* light sweep shine across the image */
-    .about-image-block::after {
+    .about-video-wrap::after {
       content: '';
       position: absolute;
       top: 0;
@@ -1527,26 +1557,6 @@
     </div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item reveal">
-      <div class="stat-number" data-target="4" data-suffix="+">0+</div>
-      <div class="stat-label" data-en="Product Categories" data-nl="Productcategorieën">Product Categories</div>
-    </div>
-    <div class="stat-item reveal" style="transition-delay:0.1s">
-      <div class="stat-number" data-target="7" data-suffix="">0</div>
-      <div class="stat-label" data-en="Countries Served" data-nl="Landen Bediend">Countries Served</div>
-    </div>
-    <div class="stat-item reveal" style="transition-delay:0.2s">
-      <div class="stat-number" data-target="2023" data-suffix="">0</div>
-      <div class="stat-label" data-en="Founded" data-nl="Opgericht">Founded</div>
-    </div>
-    <div class="stat-item reveal" style="transition-delay:0.3s">
-      <div class="stat-number" data-target="100" data-suffix="%">0%</div>
-      <div class="stat-label" data-en="Quality Assured" data-nl="Kwaliteitsgeborgd">Quality Assured</div>
-    </div>
-  </div>
-
   <!-- BRAND MARQUEE -->
   <div class="brands-section">
     <p class="brands-label" data-en="Trusted Brands We Distribute" data-nl="Vertrouwde Merken Die Wij Distribueren">Trusted Brands We Distribute</p>
@@ -1583,6 +1593,20 @@
           alt="Robotics and automation in industry"
           onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
         />
+      </div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">2023</div>
+          <div class="about-stat-label" data-en="Established" data-nl="Opgericht">Established</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">8+</div>
+          <div class="about-stat-label" data-en="Premium Brands" data-nl="Premium Merken">Premium Brands</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">24/7</div>
+          <div class="about-stat-label" data-en="Partner Support" data-nl="Partner Support">Partner Support</div>
+        </div>
       </div>
     </div>
     <div class="about-text">
