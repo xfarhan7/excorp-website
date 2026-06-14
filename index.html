@@ -192,6 +192,58 @@
     }
     .lang-toggle.nl .lang-slider { transform: translateX(100%); }
 
+    /* ─── PAGE LOADER ─── */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .page-loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+    .loader-emblem {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #C9A84C, #8a7035);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      font-style: italic;
+      color: #0a0a0a;
+      box-shadow: 0 0 40px rgba(201,168,76,0.4);
+      animation: emblemPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes emblemPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(201,168,76,0.4); }
+      50%      { transform: scale(1.05); box-shadow: 0 0 60px rgba(201,168,76,0.6); }
+    }
+    .loader-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+    }
+    .loader-bar {
+      width: 140px; height: 2px;
+      background: rgba(201,168,76,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader-bar-fill {
+      width: 0%; height: 100%;
+      background: linear-gradient(to right, #8a7035, #C9A84C);
+      animation: loaderFill 1.4s ease forwards;
+    }
+    @keyframes loaderFill {
+      0%   { width: 0%; }
+      100% { width: 100%; }
+    }
+
     /* ─── CURSOR TRAIL ─── */
     .cursor-dot {
       position: fixed;
@@ -301,16 +353,36 @@
     /* ─── HERO ─── */
     #home {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
       padding: 8rem 4rem 4rem;
       position: relative;
-      gap: 4rem;
+      overflow: hidden;
       background:
-        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
         linear-gradient(135deg, #0a0a0a 0%, #111108 100%);
     }
+    /* animated gradient mesh layer */
+    #home::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(201,168,76,0.10) 0%, transparent 25%),
+        radial-gradient(circle at 75% 40%, rgba(201,168,76,0.06) 0%, transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(140,112,53,0.08) 0%, transparent 28%);
+      animation: meshFloat 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes meshFloat {
+      0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50%  { transform: translate(3%, -2%) scale(1.08) rotate(4deg); }
+      100% { transform: translate(-2%, 3%) scale(1.03) rotate(-3deg); }
+    }
+    #home > * { position: relative; z-index: 1; }
     .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
     .hero-right {
       display: flex;
@@ -470,7 +542,7 @@
       margin-top: 2rem;
       max-width: 420px;
       font-size: 0.85rem;
-      line-height: 1.9;
+      line-height: 1.7;
       color: var(--text-muted);
       animation: fadeUp 0.9s ease 0.6s both;
     }
@@ -483,7 +555,8 @@
       animation: fadeUp 0.9s ease 0.8s both;
     }
     .btn-primary {
-      padding: 0.85rem 2.5rem;
+      height: 48px;
+      padding: 0 2.5rem;
       background: var(--gold);
       color: var(--dark);
       font-family: 'Montserrat', sans-serif;
@@ -493,10 +566,15 @@
       text-transform: uppercase;
       text-decoration: none;
       transition: background 0.3s, transform 0.2s;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      box-sizing: border-box;
     }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
     .btn-ghost {
+      height: 48px;
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -504,11 +582,14 @@
       text-decoration: none;
       opacity: 0.6;
       transition: opacity 0.3s;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.6rem;
+      padding: 0;
+      line-height: 1;
+      box-sizing: border-box;
     }
-    .btn-ghost::after { content: '→'; font-size: 1rem; }
+    .btn-ghost::after { content: '→'; font-size: 0.85rem; line-height: 1; }
     .btn-ghost:hover { opacity: 1; }
 
     /* ─── STATS ─── */
@@ -588,9 +669,9 @@
       background: linear-gradient(
         100deg,
         transparent 0%,
-        rgba(201,168,76,0.0) 30%,
-        rgba(255,245,210,0.18) 50%,
-        rgba(201,168,76,0.0) 70%,
+        rgba(60,130,220,0.0) 30%,
+        rgba(90,170,255,0.28) 50%,
+        rgba(60,130,220,0.0) 70%,
         transparent 100%
       );
       transform: skewX(-18deg);
@@ -665,15 +746,18 @@
     }
     .about-text p {
       font-size: 0.85rem;
-      line-height: 2;
+      line-height: 1.7;
       color: rgba(245,240,232,0.7);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.3rem;
+      text-align: left;
+      max-width: 540px;
     }
     .about-values {
       margin-top: 2.5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 2rem 1.5rem;
+      align-items: start;
     }
     .value-item { border-left: 1px solid var(--gold-dim); padding-left: 1rem; }
     .value-title {
@@ -683,7 +767,7 @@
       color: var(--gold);
       margin-bottom: 0.4rem;
     }
-    .value-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.7; }
+    .value-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
 
     /* ─── PRODUCTS ─── */
     #products { background: var(--dark); }
@@ -721,7 +805,7 @@
       font-weight: 400;
       margin-bottom: 1rem;
     }
-    .product-desc { font-size: 0.75rem; line-height: 1.9; color: var(--text-muted); }
+    .product-desc { font-size: 0.75rem; line-height: 1.65; color: var(--text-muted); max-width: 380px; }
     .product-number {
       position: absolute;
       top: 2rem; right: 2.5rem;
@@ -741,7 +825,7 @@
     }
     .contact-info p {
       font-size: 0.85rem;
-      line-height: 2;
+      line-height: 1.7;
       color: rgba(245,240,232,0.6);
       margin-bottom: 2.5rem;
     }
@@ -775,12 +859,15 @@
       outline: none;
       transition: border-color 0.3s;
       width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      display: block;
     }
     .form-input:focus, .form-textarea:focus {
       border-color: var(--gold);
       background: rgba(201,168,76,0.04);
     }
-    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-textarea { resize: vertical; min-height: 130px; width: 100%; max-width: 100%; }
     .form-submit {
       align-self: flex-start;
       padding: 0.9rem 2.8rem;
@@ -1054,32 +1141,61 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* scroll-driven animations — JS adds .animate-ready then .animate-in */
+    .animate-ready { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .animate-ready.animate-in { opacity: 1; transform: translateY(0); }
+    .animate-ready.from-left  { transform: translateX(-50px); }
+    .animate-ready.from-left.animate-in  { transform: translateX(0); }
+    .animate-ready.from-right { transform: translateX(50px); }
+    .animate-ready.from-right.animate-in { transform: translateX(0); }
+    .animate-ready.scale-in   { transform: scale(0.92); }
+    .animate-ready.scale-in.animate-in   { transform: scale(1); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
-      .nav-social { display: none; }
+      .nav-social { display: none !important; }
       .hamburger { display: flex; }
+      .nav-logo { font-size: 1.25rem; letter-spacing: 0.1em; }
       #home { padding: 7rem 1.5rem 4rem; }
       section { padding: 5rem 1.5rem; }
-      .stats-bar { padding: 2rem 1.5rem; }
-      #about { grid-template-columns: 1fr; gap: 3rem; }
-      .about-image-block { height: auto; }
+      .stats-bar { padding: 2.5rem 1.5rem; gap: 2rem 1rem; }
+      .stat-item { flex: 1 1 40%; min-width: 120px; }
+      .stat-number { font-size: 1.8rem; }
+      .brands-section { padding: 2.5rem 0; }
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-image-block { height: auto; align-self: stretch; }
       .about-accent-box { display: none; }
+      .about-text { padding: 0; }
       .products-grid { grid-template-columns: 1fr; }
-      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-section { padding: 5rem 1.5rem; }
+      .reach-section { padding: 5rem 1.5rem; }
+      .faq-grid { margin-top: 2rem; }
+      #contact { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-form { width: 100%; }
       .form-submit { align-self: stretch; text-align: center; }
-      footer { flex-direction: column; text-align: center; }
-      .footer-links { justify-content: center; }
+      footer { flex-direction: column; text-align: center; gap: 1.5rem; padding: 3rem 1.5rem; }
+      .footer-links { justify-content: center; flex-wrap: wrap; gap: 1rem; }
       .footer-social { justify-content: center; }
       .map-wrapper { height: 280px; }
       .chat-window { left: 1rem; right: 1rem; width: auto; }
     }
 
     @media (max-width: 480px) {
-      .hero-title { font-size: 2.8rem; }
-      .about-values { grid-template-columns: 1fr; }
-      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .about-text p { max-width: 100%; }
+      .nav-logo { font-size: 1.05rem; letter-spacing: 0.05em; }
+      .hero-tag { font-size: 0.55rem; letter-spacing: 0.25em; margin-bottom: 1rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-subtitle { font-size: 0.8rem; margin-top: 1.5rem; }
+      .hero-cta { flex-direction: column; align-items: stretch; gap: 1rem; width: 100%; }
+      .hero-cta a { text-align: center; width: 100%; }
+      .stats-bar { flex-direction: column; gap: 1.8rem; }
+      .stat-item { flex: 1 1 100%; }
+      .section-title { font-size: 2rem; }
+      .about-values { grid-template-columns: 1fr; gap: 1.5rem; }
+      .faq-question { font-size: 0.78rem; }
+      .value-item { padding-left: 1rem; }
     }
 
     .btn-catalogue {
@@ -1134,6 +1250,43 @@
       overflow: hidden;
       border-top: 1px solid rgba(201,168,76,0.1);
       border-bottom: 1px solid rgba(201,168,76,0.1);
+      position: relative;
+    }
+    /* vertical laser beam in the center */
+    .brands-laser {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      margin-left: -1px;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(201,168,76,0.0) 15%,
+        rgba(201,168,76,0.9) 45%,
+        rgba(255,245,180,1) 50%,
+        rgba(201,168,76,0.9) 55%,
+        rgba(201,168,76,0.0) 85%,
+        transparent 100%);
+      filter: blur(1px);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .brands-laser::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 90px; height: 90px;
+      margin: -45px 0 0 -45px;
+      background: radial-gradient(circle, rgba(255,245,180,0.4) 0%, rgba(201,168,76,0.15) 40%, transparent 70%);
+      filter: blur(8px);
+      border-radius: 50%;
+    }
+    /* fade edges of the marquee */
+    .brands-mask {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
     }
     .brands-label {
       text-align: center;
@@ -1171,6 +1324,63 @@
       transition: border-color 0.3s, color 0.3s;
     }
     .brand-pill:hover { border-color: var(--gold); color: var(--gold); }
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(245,240,232,0.22);
+      white-space: nowrap;
+      transition: color 0.4s ease, transform 0.4s ease, text-shadow 0.4s ease;
+      cursor: default;
+    }
+    .brand-logo.lit {
+      color: var(--gold);
+      transform: scale(1.12);
+      text-shadow: 0 0 20px rgba(201,168,76,0.6);
+    }
+
+    /* ─── WORLD MAP / GLOBAL REACH ─── */
+    .reach-section {
+      padding: 8rem 4rem;
+      background: var(--dark-2);
+      text-align: center;
+    }
+    .world-map-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .world-map { width: 100%; height: auto; }
+    .map-hq-ring {
+      transform-origin: 505px 135px;
+      animation: hqPulse 2.5s ease-out infinite;
+    }
+    @keyframes hqPulse {
+      0%   { r: 6; opacity: 0.9; }
+      100% { r: 28; opacity: 0; }
+    }
+    .map-dest {
+      animation: destPulse 3.6s ease-in-out infinite;
+    }
+    @keyframes destPulse {
+      0%, 100% { opacity: 0.3; }
+      50%      { opacity: 1; }
+    }
+    .map-arc {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: arcDraw 3.6s ease-in-out infinite;
+    }
+    @keyframes arcDraw {
+      0%   { stroke-dashoffset: 400; opacity: 0; }
+      30%  { opacity: 1; }
+      60%  { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
     .brand-pill-dot {
       width: 5px; height: 5px;
       background: var(--gold);
@@ -1180,7 +1390,7 @@
 
     /* ─── FAQ SECTION ─── */
     .faq-section {
-      padding: 7rem 4rem;
+      padding: 8rem 4rem;
       background: var(--dark);
     }
     .faq-grid {
@@ -1253,6 +1463,15 @@
   </style>
 </head>
 <body>
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-emblem">E</div>
+      <div class="loader-brand">EXCORP DISTRIBUTION</div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+
   <!-- CURSOR -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -1266,7 +1485,7 @@
       <li><a href="#products">Products</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="nav-social" style="display:flex;align-items:center;gap:1rem;">
+    <div class="nav-social">
       <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank" title="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
@@ -1287,7 +1506,12 @@
     <a href="#about" onclick="closeMenu()">About</a>
     <a href="#products" onclick="closeMenu()">Products</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="excorp_catalogue.html" onclick="closeMenu()" style="color:var(--gold);">☕ Catalogue</a>
     <a href="https://www.linkedin.com/in/farhan-din-80425baa/" target="_blank">LinkedIn</a>
+    <div style="display:flex;gap:0.5rem;margin-top:1rem;">
+      <button onclick="setLang('en')" style="flex:1;padding:0.7rem;background:var(--gold);color:var(--dark);border:none;border-radius:4px;font-family:Montserrat,sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em;cursor:pointer;">🇬🇧 EN</button>
+      <button onclick="setLang('nl')" style="flex:1;padding:0.7rem;background:transparent;color:var(--gold);border:1px solid var(--gold);border-radius:4px;font-family:Montserrat,sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em;cursor:pointer;">🇳🇱 NL</button>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -1299,32 +1523,6 @@
       <div class="hero-cta">
         <a href="#products" class="btn-primary" data-en="Our Products" data-nl="Onze Producten">Our Products</a>
         <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="brand-carousel" id="brandCarousel">
-        <div class="laser-line"></div>
-        <div class="laser-glow" id="laserGlow"></div>
-        <div class="brand-card bc-nespresso" data-index="0">
-          <div class="brand-card-inner"><div class="brand-card-name">NESPRESSO</div></div>
-        </div>
-        <div class="brand-card bc-dolce" data-index="1">
-          <div class="brand-card-inner"><div class="brand-card-name">Dolce Gusto</div></div>
-        </div>
-        <div class="brand-card bc-starbucks" data-index="2">
-          <div class="brand-card-inner"><div class="brand-card-name">STARBUCKS</div></div>
-        </div>
-        <div class="brand-card bc-davidoff" data-index="3">
-          <div class="brand-card-inner"><div class="brand-card-name">Davidoff</div></div>
-        </div>
-        <div class="brand-card bc-lavazza" data-index="4">
-          <div class="brand-card-inner"><div class="brand-card-name">LAVAZZA</div></div>
-        </div>
-        <div class="brand-card bc-illy" data-index="5">
-          <div class="brand-card-inner"><div class="brand-card-name">illy</div></div>
-        </div>
-        </div>
-        </div>
       </div>
     </div>
   </section>
@@ -1351,26 +1549,27 @@
 
   <!-- BRAND MARQUEE -->
   <div class="brands-section">
-    <p class="brands-label" data-en="Trusted Product Categories We Supply" data-nl="Vertrouwde Categorieën Die Wij Leveren">Trusted Product Categories We Supply</p>
-    <div style="overflow:hidden;">
+    <p class="brands-label" data-en="Trusted Brands We Distribute" data-nl="Vertrouwde Merken Die Wij Distribueren">Trusted Brands We Distribute</p>
+    <div class="brands-laser"></div>
+    <div class="brands-mask">
       <div class="marquee-track" id="marqueeTrack">
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Beverages</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Food &amp; Grocery</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Personal Care</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Home &amp; Cleaning</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>FMCG Distribution</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Premium Brands</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>B2B Wholesale</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Worldwide Delivery</span>
+        <span class="brand-logo">NESPRESSO</span>
+        <span class="brand-logo">DOLCE GUSTO</span>
+        <span class="brand-logo">STARBUCKS</span>
+        <span class="brand-logo">LAVAZZA</span>
+        <span class="brand-logo">ILLY</span>
+        <span class="brand-logo">DAVIDOFF</span>
+        <span class="brand-logo">L'OR</span>
+        <span class="brand-logo">COSTA</span>
         <!-- duplicate for seamless loop -->
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Beverages</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Food &amp; Grocery</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Personal Care</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Home &amp; Cleaning</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>FMCG Distribution</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Premium Brands</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>B2B Wholesale</span>
-        <span class="brand-pill"><span class="brand-pill-dot"></span>Worldwide Delivery</span>
+        <span class="brand-logo">NESPRESSO</span>
+        <span class="brand-logo">DOLCE GUSTO</span>
+        <span class="brand-logo">STARBUCKS</span>
+        <span class="brand-logo">LAVAZZA</span>
+        <span class="brand-logo">ILLY</span>
+        <span class="brand-logo">DAVIDOFF</span>
+        <span class="brand-logo">L'OR</span>
+        <span class="brand-logo">COSTA</span>
       </div>
     </div>
   </div>
@@ -1407,7 +1606,7 @@
         </div>
         <div class="value-item">
           <div class="value-title" data-en="Integrity" data-nl="Integriteit">Integrity</div>
-          <div class="value-desc" data-en="Transparent partnerships built for the long term." data-nl="Transparante partnerschappen voor de lange termijn.">Transparent partnerships built for the long term.</div>
+          <div class="value-desc" data-en="Transparent, long-term partnerships." data-nl="Transparante partnerschappen voor lang.">Transparent, long-term partnerships.</div>
         </div>
       </div>
     </div>
@@ -1426,14 +1625,14 @@
         <div class="product-number">01</div>
         <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M8 2h8M9 2v4.5C9 9 6 11 6 15a6 6 0 0012 0c0-4-3-6-3-8.5V2"/><line x1="6" y1="13" x2="18" y2="13"/></svg></div>
         <div class="product-name" data-en="Beverages" data-nl="Dranken">Beverages</div>
-        <div class="product-desc" data-en="Premium soft drinks, juices, water, energy drinks, and functional beverages sourced from globally trusted brands." data-nl="Premium frisdranken, sappen, water, energiedranken en functionele dranken van wereldwijd vertrouwde merken.">Premium soft drinks, juices, water, energy drinks, and functional beverages sourced from globally trusted brands.</div>
+        <div class="product-desc" data-en="Premium soft drinks, juices, energy drinks, and functional beverages from trusted brands." data-nl="Premium frisdranken, sappen, energiedranken en functionele dranken van vertrouwde merken.">Premium soft drinks, juices, energy drinks, and functional beverages from trusted brands.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.1s">
         <div class="tilt-shine"></div>
         <div class="product-number">02</div>
         <div class="product-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
         <div class="product-name" data-en="Food &amp; Grocery" data-nl="Voeding &amp; Kruidenierswaren">Food &amp; Grocery</div>
-        <div class="product-desc" data-en="Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety." data-nl="Basisproducten, sauzen, snacks, zuivel en verpakte levensmiddelen die voldoen aan de hoogste kwaliteits- en veiligheidsnormen.">Pantry staples, condiments, snacks, dairy, and packaged foods meeting the highest standards of quality and safety.</div>
+        <div class="product-desc" data-en="Pantry staples, condiments, snacks, dairy, and packaged foods of the highest quality." data-nl="Basisproducten, sauzen, snacks, zuivel en verpakte levensmiddelen van topkwaliteit.">Pantry staples, condiments, snacks, dairy, and packaged foods of the highest quality.</div>
       </div>
       <div class="product-card reveal" style="transition-delay:0.2s">
         <div class="tilt-shine"></div>
@@ -1547,6 +1746,62 @@
     </div>
   </section>
 
+  <!-- WORLD MAP / GLOBAL REACH -->
+  <section class="reach-section" id="reach">
+    <div style="text-align:center;" class="reveal">
+      <p style="font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;font-family:'Montserrat',sans-serif;" data-en="Global Reach" data-nl="Wereldwijd Bereik">Global Reach</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--text-off-white);margin:1rem 0 0.5rem;" data-en="Delivering <em style='color:var(--gold);font-style:italic;'>Worldwide</em>" data-nl="Wereldwijd <em style='color:var(--gold);font-style:italic;'>Leveren</em>">Delivering <em style="color:var(--gold);font-style:italic;">Worldwide</em></h2>
+      <p style="font-size:0.8rem;color:var(--text-muted);font-family:'Montserrat',sans-serif;max-width:480px;margin:0 auto 2.5rem;line-height:1.7;" data-en="From our base in the Netherlands, we supply premium FMCG products to partners across every continent." data-nl="Vanuit onze basis in Nederland leveren wij premium FMCG-producten aan partners op elk continent.">From our base in the Netherlands, we supply premium FMCG products to partners across every continent.</p>
+    </div>
+    <div class="world-map-wrap reveal">
+      <svg class="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- simplified continents as dot grid -->
+        <g class="map-dots" fill="rgba(201,168,76,0.18)">
+          <!-- North America -->
+          <circle cx="180" cy="140" r="3"/><circle cx="200" cy="130" r="3"/><circle cx="160" cy="160" r="3"/><circle cx="220" cy="150" r="3"/><circle cx="190" cy="170" r="3"/><circle cx="240" cy="140" r="3"/><circle cx="170" cy="120" r="3"/><circle cx="210" cy="180" r="3"/><circle cx="230" cy="170" r="3"/><circle cx="150" cy="140" r="3"/>
+          <!-- South America -->
+          <circle cx="280" cy="320" r="3"/><circle cx="300" cy="340" r="3"/><circle cx="290" cy="360" r="3"/><circle cx="310" cy="310" r="3"/><circle cx="295" cy="300" r="3"/><circle cx="305" cy="380" r="3"/>
+          <!-- Europe -->
+          <circle cx="500" cy="140" r="3"/><circle cx="520" cy="130" r="3"/><circle cx="510" cy="155" r="3"/><circle cx="490" cy="150" r="3"/><circle cx="530" cy="145" r="3"/><circle cx="505" cy="125" r="3"/>
+          <!-- Africa -->
+          <circle cx="510" cy="250" r="3"/><circle cx="530" cy="270" r="3"/><circle cx="520" cy="300" r="3"/><circle cx="540" cy="240" r="3"/><circle cx="525" cy="320" r="3"/><circle cx="500" cy="280" r="3"/><circle cx="545" cy="290" r="3"/>
+          <!-- Middle East -->
+          <circle cx="580" cy="200" r="3"/><circle cx="595" cy="210" r="3"/><circle cx="570" cy="215" r="3"/>
+          <!-- Asia -->
+          <circle cx="650" cy="160" r="3"/><circle cx="680" cy="150" r="3"/><circle cx="700" cy="180" r="3"/><circle cx="670" cy="170" r="3"/><circle cx="720" cy="160" r="3"/><circle cx="690" cy="200" r="3"/><circle cx="730" cy="190" r="3"/><circle cx="710" cy="140" r="3"/><circle cx="660" cy="190" r="3"/>
+          <!-- Australia -->
+          <circle cx="780" cy="350" r="3"/><circle cx="800" cy="360" r="3"/><circle cx="790" cy="380" r="3"/><circle cx="810" cy="345" r="3"/>
+        </g>
+        <!-- HQ marker - Netherlands -->
+        <circle cx="505" cy="135" r="6" fill="#C9A84C" class="map-hq"/>
+        <circle cx="505" cy="135" r="6" fill="none" stroke="#C9A84C" stroke-width="1.5" class="map-hq-ring"/>
+        <text x="505" y="118" text-anchor="middle" fill="#C9A84C" font-family="Montserrat, sans-serif" font-size="13" font-weight="600" letter-spacing="1">THE NETHERLANDS</text>
+        <!-- destination pulse markers -->
+        <circle cx="200" cy="145" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0s"/>
+        <circle cx="295" cy="330" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0.6s"/>
+        <circle cx="585" cy="205" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.2s"/>
+        <circle cx="525" cy="290" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.8s"/>
+        <circle cx="695" cy="175" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:2.4s"/>
+        <circle cx="795" cy="360" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:3s"/>
+        <!-- arcs from HQ to destinations -->
+        <g class="map-arcs" fill="none" stroke="url(#arcGrad)" stroke-width="1.5">
+          <path d="M505,135 Q350,80 200,145" class="map-arc" style="animation-delay:0s"/>
+          <path d="M505,135 Q400,200 295,330" class="map-arc" style="animation-delay:0.6s"/>
+          <path d="M505,135 Q560,150 585,205" class="map-arc" style="animation-delay:1.2s"/>
+          <path d="M505,135 Q540,200 525,290" class="map-arc" style="animation-delay:1.8s"/>
+          <path d="M505,135 Q620,100 695,175" class="map-arc" style="animation-delay:2.4s"/>
+          <path d="M505,135 Q680,180 795,360" class="map-arc" style="animation-delay:3s"/>
+        </g>
+        <defs>
+          <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#5aaaff" stop-opacity="0.4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-logo">EXCORP DISTRIBUTION</div>
     <ul class="footer-links">
@@ -1620,11 +1875,52 @@
         window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
       }
 
+      // ── PAGE LOADER ───────────────────────────────────────
+      var loader = document.getElementById('pageLoader');
+      if (loader) {
+        window.addEventListener('load', function() {
+          setTimeout(function() { loader.classList.add('hidden'); }, 1400);
+        });
+        // fallback in case load already fired
+        setTimeout(function() { loader.classList.add('hidden'); }, 2500);
+      }
+
       // ── SCROLL REVEAL ─────────────────────────────────────
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(function(r) { observer.observe(r); });
+
+      // ── SCROLL-DRIVEN ANIMATIONS ──────────────────────────
+      // auto-tag sections for directional animations
+      var animTargets = [
+        ['#about .about-image-block', 'from-left'],
+        ['#about .about-text', 'from-right'],
+        ['.product-card', 'scale-in'],
+        ['.stat-item', ''],
+        ['.faq-item', ''],
+        ['.value-item', ''],
+        ['.world-map-wrap', 'scale-in'],
+      ];
+      animTargets.forEach(function(pair) {
+        document.querySelectorAll(pair[0]).forEach(function(el) {
+          el.classList.add('animate-ready');
+          if (pair[1]) el.classList.add(pair[1]);
+        });
+      });
+      var animObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e, i) {
+          if (e.isIntersecting) {
+            var delay = (e.target.dataset.animDelay || 0) * 1;
+            setTimeout(function() { e.target.classList.add('animate-in'); }, delay);
+            animObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      // stagger product cards and stats
+      document.querySelectorAll('.product-card').forEach(function(el, i) { el.dataset.animDelay = i * 100; });
+      document.querySelectorAll('.stat-item').forEach(function(el, i) { el.dataset.animDelay = i * 80; });
+      document.querySelectorAll('.animate-ready').forEach(function(el) { animObserver.observe(el); });
 
       // ── ANIMATED COUNTERS ─────────────────────────────────
       function animateCounter(el) {
@@ -1659,7 +1955,7 @@
       var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
       var lastTrailX = 0, lastTrailY = 0;
 
-      if (dot && ring) {
+      if (dot && ring && !('ontouchstart' in window) && window.innerWidth > 900) {
         document.addEventListener('mousemove', function(e) {
           mouseX = e.clientX;
           mouseY = e.clientY;
@@ -1697,6 +1993,8 @@
       }
 
       // ── 3D CARD TILT ──────────────────────────────────────
+      var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || window.innerWidth <= 900;
+      if (!isTouch) {
       document.querySelectorAll('.product-card').forEach(function(card) {
         var shine = card.querySelector('.tilt-shine');
         card.addEventListener('mousemove', function(e) {
@@ -1718,6 +2016,7 @@
           if (shine) shine.style.opacity = '0';
         });
       });
+      } // end if !isTouch
 
       // ── FAQ TOGGLE ────────────────────────────────────────
       function toggleFaq(btn) {
@@ -1825,54 +2124,25 @@
       }
 
 
-      // ── BRAND CAROUSEL ────────────────────────────────────
+      // ── BRAND MARQUEE LASER ───────────────────────────────
       (function() {
-        var carousel = document.getElementById('brandCarousel');
-        if (!carousel) return;
-        var cards = Array.from(carousel.querySelectorAll('.brand-card'));
-        var glow  = document.getElementById('laserGlow');
-        var total = cards.length;
-        var cardH = 88;
-        var gap   = 10;
-        var viewH = 420;
-        var totalH = total * cardH + (total - 1) * gap;
-        var startY = (viewH - totalH) / 2;
-
-        // Static fan positioning
-        cards.forEach(function(card, i) {
-          var y      = startY + i * (cardH + gap);
-          var centre = (total - 1) / 2;
-          var dist   = i - centre;
-          var rotX   = dist * -5;
-          var scale  = 1 - Math.abs(dist) * 0.03;
-          var op     = 1 - Math.abs(dist) * 0.08;
-          card.style.top       = y + 'px';
-          card.style.transform = 'rotateX(' + rotX + 'deg) scaleY(' + scale + ')';
-          card.style.opacity   = op;
-          card.style.zIndex    = total - Math.abs(Math.round(dist));
-        });
-
-        function getCardCentreY(i) {
-          return startY + i * (cardH + gap) + cardH / 2;
+        var section = document.querySelector('.brands-section');
+        var logos = document.querySelectorAll('.brand-logo');
+        if (!section || !logos.length) return;
+        function updateLit() {
+          var rect = section.getBoundingClientRect();
+          var centerX = rect.left + rect.width / 2;
+          logos.forEach(function(logo) {
+            var r = logo.getBoundingClientRect();
+            var logoCenter = r.left + r.width / 2;
+            var dist = Math.abs(logoCenter - centerX);
+            // light up when within ~70px of the center beam
+            if (dist < 70) logo.classList.add('lit');
+            else logo.classList.remove('lit');
+          });
+          requestAnimationFrame(updateLit);
         }
-
-        var current = 0;
-
-        function litCard(i) {
-          cards.forEach(function(c) { c.classList.remove('lit'); });
-          if (glow) glow.style.top = (getCardCentreY(i) - 40) + 'px';
-          setTimeout(function() {
-            if (cards[i]) cards[i].classList.add('lit');
-          }, 120);
-        }
-
-        if (glow) glow.style.top = (getCardCentreY(0) - 40) + 'px';
-        litCard(0);
-
-        setInterval(function() {
-          current = (current + 1) % total;
-          litCard(current);
-        }, 1400);
+        requestAnimationFrame(updateLit);
       })();
 
       // ── EXPOSE GLOBALS ────────────────────────────────────
