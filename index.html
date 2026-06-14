@@ -47,7 +47,7 @@
     "contactPoint": [
       {
         "@type": "ContactPoint",
-        "telephone": "+31-6-81549755",
+        "email": "farhan@excorpdistribution.nl",
         "contactType": "sales",
         "availableLanguage": ["English", "Dutch"]
       },
@@ -352,12 +352,12 @@
 
     /* ─── HERO ─── */
     #home {
-      min-height: 78vh;
+      min-height: 82vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: flex-start;
-      padding: 7rem 4rem 2rem;
+      padding: 11rem 4rem 3rem;
       position: relative;
       overflow: hidden;
       background:
@@ -382,7 +382,15 @@
       50%  { transform: translate(3%, -2%) scale(1.08) rotate(4deg); }
       100% { transform: translate(-2%, 3%) scale(1.03) rotate(-3deg); }
     }
-    #home > * { position: relative; z-index: 1; }
+    #home > *:not(.hero-particles) { position: relative; z-index: 1; }
+    #home .hero-particles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
     .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
     .hero-right {
       display: flex;
@@ -1383,6 +1391,7 @@
     .world-map-wrap {
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
     }
     .world-map { width: 100%; height: auto; }
     .map-hq-ring {
@@ -1546,6 +1555,7 @@
 
   <!-- HERO -->
   <section id="home">
+    <canvas class="hero-particles" id="heroParticles"></canvas>
     <div class="hero-left">
       <p class="hero-tag" data-en="Premium FMCG Distribution" data-nl="Premium FMCG Distributie">Premium FMCG Distribution</p>
       <h1 class="hero-title"><span data-en="Delivering <em>Excellence</em><br>Across Every Shelf" data-nl="Kwaliteit <em>Leveren</em><br>Op Elk Schap">Delivering <em>Excellence</em><br>Across Every Shelf</span></h1>
@@ -1688,10 +1698,6 @@
           <span class="contact-detail-value"><a href="mailto:farhan@excorpdistribution.nl">farhan@excorpdistribution.nl</a></span>
         </div>
         <div class="contact-detail-item">
-          <span class="contact-detail-label" data-en="Phone" data-nl="Telefoon">Phone</span>
-          <span class="contact-detail-value">+31 6 81549755</span>
-        </div>
-        <div class="contact-detail-item">
           <span class="contact-detail-label" data-en="Location" data-nl="Locatie">Location</span>
           <span class="contact-detail-value">Laan van Europa 370, 3317DB, Dordrecht, The Netherlands</span>
         </div>
@@ -1802,19 +1808,25 @@
         <text x="505" y="118" text-anchor="middle" fill="#C9A84C" font-family="Montserrat, sans-serif" font-size="13" font-weight="600" letter-spacing="1">THE NETHERLANDS</text>
         <!-- destination pulse markers -->
         <circle cx="200" cy="145" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0s"/>
-        <circle cx="295" cy="330" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0.6s"/>
-        <circle cx="585" cy="205" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.2s"/>
-        <circle cx="525" cy="290" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.8s"/>
-        <circle cx="695" cy="175" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:2.4s"/>
-        <circle cx="795" cy="360" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:3s"/>
+        <circle cx="295" cy="330" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0.4s"/>
+        <circle cx="585" cy="205" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:0.8s"/>
+        <circle cx="525" cy="290" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.2s"/>
+        <circle cx="695" cy="175" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:1.6s"/>
+        <circle cx="795" cy="360" r="4" fill="#5aaaff" class="map-dest" style="animation-delay:2s"/>
+        <!-- European destination markers -->
+        <circle cx="515" cy="148" r="3.5" fill="#5aaaff" class="map-dest" style="animation-delay:2.4s"/>
+        <circle cx="495" cy="158" r="3.5" fill="#5aaaff" class="map-dest" style="animation-delay:2.7s"/>
+        <circle cx="525" cy="138" r="3.5" fill="#5aaaff" class="map-dest" style="animation-delay:3s"/>
+        <circle cx="485" cy="142" r="3.5" fill="#5aaaff" class="map-dest" style="animation-delay:3.3s"/>
+        <circle cx="535" cy="130" r="3.5" fill="#5aaaff" class="map-dest" style="animation-delay:3.6s"/>
         <!-- arcs from HQ to destinations -->
         <g class="map-arcs" fill="none" stroke="url(#arcGrad)" stroke-width="1.5">
           <path d="M505,135 Q350,80 200,145" class="map-arc" style="animation-delay:0s"/>
-          <path d="M505,135 Q400,200 295,330" class="map-arc" style="animation-delay:0.6s"/>
-          <path d="M505,135 Q560,150 585,205" class="map-arc" style="animation-delay:1.2s"/>
-          <path d="M505,135 Q540,200 525,290" class="map-arc" style="animation-delay:1.8s"/>
-          <path d="M505,135 Q620,100 695,175" class="map-arc" style="animation-delay:2.4s"/>
-          <path d="M505,135 Q680,180 795,360" class="map-arc" style="animation-delay:3s"/>
+          <path d="M505,135 Q400,200 295,330" class="map-arc" style="animation-delay:0.4s"/>
+          <path d="M505,135 Q560,150 585,205" class="map-arc" style="animation-delay:0.8s"/>
+          <path d="M505,135 Q540,200 525,290" class="map-arc" style="animation-delay:1.2s"/>
+          <path d="M505,135 Q620,100 695,175" class="map-arc" style="animation-delay:1.6s"/>
+          <path d="M505,135 Q680,180 795,360" class="map-arc" style="animation-delay:2s"/>
         </g>
         <defs>
           <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1898,6 +1910,87 @@
         var body    = encodeURIComponent('Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email + '\n\nMessage:\n' + message);
         window.location.href = 'mailto:farhan@excorpdistribution.nl?subject=' + subject + '&body=' + body;
       }
+
+      // ── HERO PARTICLE NETWORK ─────────────────────────────
+      (function() {
+        var canvas = document.getElementById('heroParticles');
+        if (!canvas) return;
+        var hero = document.getElementById('home');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var mouse = { x: null, y: null };
+        var W, H;
+        var isMobile = window.innerWidth <= 768;
+        var count = isMobile ? 28 : 60;
+
+        function resize() {
+          W = canvas.width = hero.offsetWidth;
+          H = canvas.height = hero.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        for (var i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 1.8 + 0.6
+          });
+        }
+
+        hero.addEventListener('mousemove', function(e) {
+          var rect = hero.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+        hero.addEventListener('mouseleave', function() { mouse.x = null; mouse.y = null; });
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+
+            // mouse attraction
+            if (mouse.x !== null) {
+              var dxm = mouse.x - p.x, dym = mouse.y - p.y;
+              var dm = Math.sqrt(dxm*dxm + dym*dym);
+              if (dm < 160) {
+                p.x += dxm * 0.008;
+                p.y += dym * 0.008;
+              }
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(201,168,76,0.55)';
+            ctx.fill();
+          }
+          // connecting lines
+          for (var a = 0; a < particles.length; a++) {
+            for (var b = a + 1; b < particles.length; b++) {
+              var dx = particles[a].x - particles[b].x;
+              var dy = particles[a].y - particles[b].y;
+              var dist = Math.sqrt(dx*dx + dy*dy);
+              if (dist < 130) {
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.strokeStyle = 'rgba(201,168,76,' + (0.18 * (1 - dist/130)) + ')';
+                ctx.lineWidth = 0.6;
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
 
       // ── PAGE LOADER ───────────────────────────────────────
       var loader = document.getElementById('pageLoader');
@@ -2065,7 +2158,7 @@
         partner:   "We'd love to work with you!\n\n📧 farhan@excorpdistribution.nl\n📱 WhatsApp: +31 6 15272396",
         location:  "We're based in Dordrecht, Netherlands:\n\n📍 Laan van Europa 370\n3317 DB Dordrecht",
         order:     "Getting started is easy:\n\n1. Fill in our contact form\n2. Email farhan@excorpdistribution.nl\n3. WhatsApp +31 6 15272396\n\nWe reply within 24 hours.",
-        contact:   "📧 farhan@excorpdistribution.nl\n📞 +31 6 81549755\n💬 WhatsApp: +31 6 15272396",
+        contact:   "📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
         default:   "Thanks for your message!\n\n📧 farhan@excorpdistribution.nl\n💬 WhatsApp: +31 6 15272396",
       };
 
