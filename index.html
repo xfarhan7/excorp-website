@@ -382,7 +382,7 @@
       50%  { transform: translate(3%, -2%) scale(1.08) rotate(4deg); }
       100% { transform: translate(-2%, 3%) scale(1.03) rotate(-3deg); }
     }
-    #home > *:not(.hero-particles):not(.hero-shader):not(.hero-formation):not(.hero-formation-backing) { position: relative; z-index: 1; }
+    #home > *:not(.hero-particles):not(.hero-shader) { position: relative; z-index: 1; }
     #home .hero-shader {
       position: absolute;
       inset: 0;
@@ -1528,33 +1528,6 @@
       50% { opacity: 0.5; transform: scale(0.85); }
     }
 
-    /* ─── EXCORP FORMATION (in hero, below buttons) ─── */
-    .hero-formation-backing {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 38%;
-      z-index: 1;
-      pointer-events: none;
-      background: radial-gradient(ellipse 55% 75% at 50% 60%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, transparent 100%);
-    }
-    .hero-formation {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 1rem;
-      width: 100%;
-      height: 32%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    @media (max-width: 768px) {
-      .hero-formation { height: 26%; bottom: 0.8rem; }
-      .hero-formation-backing { height: 32%; }
-    }
-
     /* ─── COOKIE BANNER ─── */
     .cookie-banner {
       position: fixed;
@@ -1736,8 +1709,6 @@
         <a href="#contact" class="btn-ghost" data-en="Get in Touch" data-nl="Neem Contact Op">Get in Touch</a>
       </div>
     </div>
-    <div class="hero-formation-backing"></div>
-    <canvas id="formationCanvas" class="hero-formation"></canvas>
   </section>
 
   <!-- BRAND MARQUEE -->
@@ -2315,150 +2286,6 @@
         draw();
       })();
 
-      // ── ROTATING WORD FORMATION (in hero, loops) ─────────
-      (function() {
-        var canvas = document.getElementById('formationCanvas');
-        if (!canvas) return;
-        var ctx = canvas.getContext('2d');
-        var W, H, dots = [];
-        var isMobile = window.innerWidth <= 768;
-        var WORDS = ['PREMIUM', 'WORLDWIDE', 'EXCELLENCE'];
-        var wordTargets = [];
-
-        function buildWordTargets(word) {
-          var off = document.createElement('canvas');
-          var octx = off.getContext('2d');
-          off.width = W; off.height = H;
-          // size font to fit the word within width (use more width, tighter)
-          var fontSize = Math.min(W * 0.52 / word.length, H * 0.46);
-          octx.fillStyle = '#fff';
-          octx.font = '800 ' + fontSize + "px 'Montserrat', 'Arial Black', sans-serif";
-          octx.textBaseline = 'middle';
-          octx.textAlign = 'left';
-          var letterW = [], totalW = 0;
-          var spacing = fontSize * 0.06;
-          for (var c = 0; c < word.length; c++) {
-            var w = octx.measureText(word[c]).width;
-            letterW.push(w);
-            totalW += w + (c < word.length - 1 ? spacing : 0);
-          }
-          var cursorX = (W - totalW) / 2;
-          for (var c2 = 0; c2 < word.length; c2++) {
-            octx.fillText(word[c2], cursorX, H / 2);
-            cursorX += letterW[c2] + spacing;
-          }
-          var data;
-          try { data = octx.getImageData(0, 0, W, H).data; } catch (e) { return []; }
-          var pts = [];
-          var gap = 2;
-          for (var y = 0; y < H; y += gap) {
-            for (var x = 0; x < W; x += gap) {
-              if (data[(y * W + x) * 4 + 3] > 128) pts.push({ x: x, y: y });
-            }
-          }
-          // shuffle for even distribution
-          for (var s = pts.length - 1; s > 0; s--) {
-            var j = Math.floor(Math.random() * (s + 1));
-            var tmp = pts[s]; pts[s] = pts[j]; pts[j] = tmp;
-          }
-          return pts;
-        }
-
-        function resize() {
-          var dpr = Math.min(window.devicePixelRatio || 1, 2);
-          W = canvas.offsetWidth;
-          H = canvas.offsetHeight;
-          if (!W || !H) return;
-          canvas.width = W * dpr;
-          canvas.height = H * dpr;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-          // build target sets for every word; all share the same dot count.
-          // use a high count so the LONGEST word is well-defined; shorter words
-          // wrap (denser, bolder) which reads clean.
-          var raw = WORDS.map(buildWordTargets);
-          var MAX = isMobile ? 1100 : 2000;
-          var maxLen = Math.max.apply(null, raw.map(function(r){ return r.length; }));
-          var count = Math.min(MAX, maxLen);
-          wordTargets = raw.map(function(r) {
-            var out = [];
-            if (r.length >= count) {
-              var stride = r.length / count;
-              for (var k = 0; k < count; k++) out.push(r[Math.floor(k * stride)] || r[r.length-1]);
-            } else {
-              // fewer points than count: repeat (wrap) so every dot has a home
-              for (var k2 = 0; k2 < count; k2++) out.push(r[k2 % r.length]);
-            }
-            return out;
-          });
-
-          dots = [];
-          var first = wordTargets[0];
-          for (var i = 0; i < count; i++) {
-            dots.push({
-              x: Math.random() * W, y: Math.random() * H,
-              tx: first[i].x, ty: first[i].y,
-              vx: (Math.random() - 0.5) * 1.2, vy: (Math.random() - 0.5) * 1.2
-            });
-          }
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        window.addEventListener('load', resize);
-        setTimeout(resize, 600);
-
-        // per-word cycle: form -> hold -> scatter, then next word
-        var FORM = 2000, HOLD = 3200, SCATTER = 1100;
-        var CYCLE = FORM + HOLD + SCATTER;
-        var startTime = performance.now();
-        var lastWordIdx = -1;
-
-        function draw(now) {
-          if (!W || !H || !dots.length) { requestAnimationFrame(draw); return; }
-          var globalT = now - startTime;
-          var wordIdx = Math.floor(globalT / CYCLE) % WORDS.length;
-          var t = globalT % CYCLE;
-
-          // when a new word starts, assign its targets to the dots
-          if (wordIdx !== lastWordIdx) {
-            var tg = wordTargets[wordIdx];
-            for (var d = 0; d < dots.length; d++) {
-              dots[d].tx = tg[d].x; dots[d].ty = tg[d].y;
-              // give scatter velocity for the dispersal phase
-              dots[d].vx = (Math.random() - 0.5) * 1.2;
-              dots[d].vy = (Math.random() - 0.5) * 1.2;
-            }
-            lastWordIdx = wordIdx;
-          }
-
-          ctx.clearRect(0, 0, W, H);
-          var forming = t < (FORM + HOLD);
-          for (var i = 0; i < dots.length; i++) {
-            var p = dots[i];
-            if (t < FORM) {
-              p.x += (p.tx - p.x) * 0.1;
-              p.y += (p.ty - p.y) * 0.1;
-            } else if (t < FORM + HOLD) {
-              p.x += Math.sin(now / 500 + i) * 0.1;
-              p.y += Math.cos(now / 500 + i) * 0.1;
-            } else {
-              p.x += p.vx; p.y += p.vy;
-            }
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, forming ? 1.5 : 1.1, 0, Math.PI * 2);
-            if (forming) {
-              ctx.shadowColor = 'rgba(201,168,76,0.9)'; ctx.shadowBlur = 4;
-              ctx.fillStyle = 'rgba(232,212,139,0.97)';
-            } else {
-              ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(201,168,76,0.4)';
-            }
-            ctx.fill();
-          }
-          ctx.shadowBlur = 0;
-          requestAnimationFrame(draw);
-        }
-        requestAnimationFrame(draw);
-      })();
 
       // ── PAGE LOADER ───────────────────────────────────────
       var loader = document.getElementById('pageLoader');
