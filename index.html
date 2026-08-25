@@ -1464,17 +1464,31 @@
     .faq-grid {
       max-width: 800px;
       margin: 3rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
     .faq-item {
-      border-bottom: 1px solid rgba(201,168,76,0.12);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 8px;
       overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .faq-item:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(255,255,255,0.03);
+    }
+    .faq-item.open {
+      border-color: rgba(201,168,76,0.45);
+      background: rgba(201,168,76,0.04);
     }
     .faq-question {
       width: 100%;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 1.4rem 0;
+      padding: 1.4rem 1.6rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1503,8 +1517,9 @@
       font-size: 0.8rem;
       line-height: 1.85;
       color: var(--text-muted);
+      padding: 0 1.6rem;
     }
-    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.4rem; }
+    .faq-item.open .faq-answer { max-height: 260px; padding-bottom: 1.4rem; }
 
     /* ─── WHATSAPP STATUS ─── */
     .wa-status {
