@@ -8,6 +8,10 @@
   <meta name="keywords" content="FMCG distributor Netherlands, wholesale distributor Dordrecht, premium consumer goods, beverage distributor Europe, food distributor Netherlands, Excorp Distribution">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Excorp Distribution B.V.">
+  <meta name="geo.region" content="NL-ZH">
+  <meta name="geo.placename" content="Dordrecht, Netherlands">
+  <meta name="geo.position" content="51.8126;4.6913">
+  <meta name="ICBM" content="51.8126, 4.6913">
   <link rel="canonical" href="https://excorpdistribution.com/">
 
   <!-- Open Graph -->
@@ -74,6 +78,46 @@
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Home & Cleaning Distribution", "description": "Detergents and household essentials"}}
       ]
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of FMCG products does Excorp distribute?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We distribute across four core categories: Beverages (soft drinks, juices, energy drinks), Food & Grocery (pantry staples, snacks, dairy), Personal Care (skincare, haircare, hygiene), and Home & Cleaning (detergents, household essentials). All products are sourced from globally trusted FMCG brands."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which markets and regions does Excorp serve?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Excorp Distribution is based in Dordrecht, Netherlands and serves clients worldwide. We work with retailers, brands and B2B partners across multiple continents, delivering premium FMCG products wherever quality is in demand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I place a wholesale order or enquiry?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can reach us via the contact form on our website, by email at farhan@excorpdistribution.nl, or directly on WhatsApp at +31 6 15272396. We typically respond within 24 hours and are happy to discuss minimum order quantities, pricing and lead times."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you work with both brands and retailers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — we work with both sides of the supply chain. Whether you are a brand looking for a reliable distribution partner in Europe, or a retailer seeking consistent supply of quality FMCG products, Excorp Distribution can support your needs."
+        }
+      }
+    ]
   }
   </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -192,56 +236,108 @@
     }
     .lang-toggle.nl .lang-slider { transform: translateX(100%); }
 
-    /* ─── PAGE LOADER ─── */
+    /* ─── CINEMATIC REVEAL INTRO ─── */
     .page-loader {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: #0a0a0a;
+      background: #050505;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
+      overflow: hidden;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
     }
+    /* the two curtain halves that split apart to reveal the site */
+    .loader-curtain {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 50%;
+      background: #050505;
+      z-index: 1;
+      transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .loader-curtain.left  { left: 0; }
+    .loader-curtain.right { right: 0; }
+    .page-loader.reveal .loader-curtain.left  { transform: translateX(-100%); }
+    .page-loader.reveal .loader-curtain.right { transform: translateX(100%); }
     .page-loader.hidden { opacity: 0; visibility: hidden; }
-    .loader-content { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+
+    .loader-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .page-loader.reveal .loader-content { opacity: 0; transform: scale(1.08); }
+
+    /* emblem fades + scales in from nothing */
     .loader-emblem {
-      width: 72px; height: 72px;
-      background: linear-gradient(135deg, #C9A84C, #8a7035);
-      border-radius: 16px;
+      width: 76px; height: 76px;
+      background: linear-gradient(135deg, #E8D48B, #C9A84C 45%, #8a7035);
+      border-radius: 18px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 700;
       font-style: italic;
-      color: #0a0a0a;
-      box-shadow: 0 0 40px rgba(201,168,76,0.4);
-      animation: emblemPulse 1.6s ease-in-out infinite;
+      color: #050505;
+      opacity: 0;
+      transform: scale(0.6);
+      box-shadow: 0 0 50px rgba(201,168,76,0.35);
+      animation: emblemReveal 1.1s cubic-bezier(0.16,1,0.3,1) 0.2s forwards,
+                 emblemGlow 2.4s ease-in-out 1.3s infinite;
     }
-    @keyframes emblemPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(201,168,76,0.4); }
-      50%      { transform: scale(1.05); box-shadow: 0 0 60px rgba(201,168,76,0.6); }
+    @keyframes emblemReveal {
+      0%   { opacity: 0; transform: scale(0.6) translateY(8px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
+    @keyframes emblemGlow {
+      0%, 100% { box-shadow: 0 0 50px rgba(201,168,76,0.35); }
+      50%      { box-shadow: 0 0 70px rgba(201,168,76,0.55); }
+    }
+
+    /* brand name fades up */
     .loader-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      letter-spacing: 0.3em;
+      font-size: 1.1rem;
+      letter-spacing: 0.35em;
       color: var(--gold);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: brandReveal 1s ease 0.7s forwards;
     }
-    .loader-bar {
-      width: 140px; height: 2px;
-      background: rgba(201,168,76,0.15);
-      border-radius: 2px;
-      overflow: hidden;
+    @keyframes brandReveal {
+      0%   { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-    .loader-bar-fill {
-      width: 0%; height: 100%;
-      background: linear-gradient(to right, #8a7035, #C9A84C);
-      animation: loaderFill 1.4s ease forwards;
+
+    /* gold line draws itself out from the center */
+    .loader-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      animation: lineDraw 1.1s cubic-bezier(0.16,1,0.3,1) 1s forwards;
     }
-    @keyframes loaderFill {
-      0%   { width: 0%; }
-      100% { width: 100%; }
+    @keyframes lineDraw {
+      0%   { width: 0; opacity: 0; }
+      100% { width: 200px; opacity: 1; }
+    }
+    .loader-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: brandReveal 1s ease 1.4s forwards;
+    }
+    @media (max-width: 600px) {
+      .loader-emblem { width: 64px; height: 64px; font-size: 2.4rem; }
+      .loader-brand { font-size: 0.9rem; letter-spacing: 0.25em; }
     }
 
     /* ─── CURSOR TRAIL ─── */
@@ -1662,10 +1758,13 @@
 <body>
   <!-- PAGE LOADER -->
   <div class="page-loader" id="pageLoader">
+    <div class="loader-curtain left"></div>
+    <div class="loader-curtain right"></div>
     <div class="loader-content">
       <div class="loader-emblem">E</div>
       <div class="loader-brand">EXCORP DISTRIBUTION</div>
-      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+      <div class="loader-line"></div>
+      <div class="loader-tagline">Delivering Excellence</div>
     </div>
   </div>
 
@@ -1759,7 +1858,7 @@
       <div class="about-video-wrap">
         <img
           src="excorp_about.png"
-          alt="Robotics and automation in industry"
+          alt="Excorp Distribution FMCG wholesale warehouse and automated distribution in Dordrecht, Netherlands"
           onerror="this.parentElement.innerHTML='<div class=about-visual-placeholder><div class=about-visual-inner><div class=visual-icon>⚙️</div><div class=visual-lines><span></span><span></span><span></span><span></span><span></span></div></div></div>'"
         />
       </div>
@@ -2302,14 +2401,25 @@
       })();
 
 
-      // ── PAGE LOADER ───────────────────────────────────────
+      // ── CINEMATIC REVEAL INTRO ────────────────────────────
       var loader = document.getElementById('pageLoader');
       if (loader) {
-        window.addEventListener('load', function() {
-          setTimeout(function() { loader.classList.add('hidden'); }, 1400);
-        });
-        // fallback in case load already fired
-        setTimeout(function() { loader.classList.add('hidden'); }, 2500);
+        var revealStarted = false;
+        function runReveal() {
+          if (revealStarted) return;
+          revealStarted = true;
+          // hold the emblem/name for a beat, then split the curtains
+          setTimeout(function() { loader.classList.add('reveal'); }, 2200);
+          // fully remove once the curtain animation finishes
+          setTimeout(function() { loader.classList.add('hidden'); }, 3300);
+        }
+        if (document.readyState === 'complete') {
+          runReveal();
+        } else {
+          window.addEventListener('load', runReveal);
+          // fallback in case load is slow
+          setTimeout(runReveal, 3000);
+        }
       }
 
       // ── SCROLL REVEAL ─────────────────────────────────────

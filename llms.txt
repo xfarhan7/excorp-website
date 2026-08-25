@@ -21,11 +21,11 @@ Middle East: UAE, Saudi Arabia, Pakistan
 Email: farhan@excorpdistribution.nl
 WhatsApp: +31 6 15272396
 Phone: +31 6 81549755
-LinkedIn: https://www.linkedin.com/in/farhan-din-80425baa/
+LinkedIn: https://www.linkedin.com/company/excorp-distribution-b-v/
 
 ## Website
-Main site: https://xfarhan7.github.io/excorp-website/
-Product catalogue: https://xfarhan7.github.io/excorp-website/excorp_catalogue.html
+Main site: https://excorpdistribution.com/
+Product catalogue: https://excorpdistribution.com/excorp_catalogue.html
 
 ## Products
 - Beverages: soft drinks, juices, energy drinks
